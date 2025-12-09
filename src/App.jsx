@@ -119,22 +119,24 @@ const AntiDebtApp = () => {
         <div style={styles.amountDisplay}>{amount}</div>
         
         <div style={styles.categoriesRow}>
-          {categories.map((cat, idx) => (
-            <button
-              key={idx}
-              onClick={() => setSelectedCategory(idx)}
-              style={styles.categoryButton}
-            >
-              <div 
-                style={{
-                  ...styles.categoryCircle,
-                  backgroundColor: selectedCategory === idx ? cat.color : '#2D2D2D',
-                  border: selectedCategory === idx ? '3px solid #fff' : 'none'
-                }}
-              />
-            </button>
-          ))}
-        </div>
+  {categories.map((cat, idx) => (
+    <div
+      key={idx}
+      onClick={() => setSelectedCategory(idx)}
+      style={{
+        ...styles.categoryCard,
+        backgroundColor: selectedCategory === idx ? cat.color : '#3D3D3D',
+        transform: selectedCategory === idx ? 'scale(1.1)' : 'scale(1)',
+        boxShadow: selectedCategory === idx ? '0 0 12px rgba(255,255,255,0.3)' : 'none'
+      }}
+    >
+      <div style={styles.categoryCircle}>
+        <span style={styles.categoryText}>{cat.name}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
 
         <div style={styles.numpadGrid}>
           {[['7','8','9'], ['4','5','6'], ['1','2','3']].map((row, i) => (
@@ -411,18 +413,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-around',
     marginBottom: '24px'
-  },
-  categoryButton: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    padding: 0
-  },
-  categoryCircle: {
-    width: '48px',
-    height: '48px',
-    borderRadius: '50%',
-    transition: 'all 0.3s'
   },
   numpadGrid: {
     display: 'flex',
@@ -721,7 +711,35 @@ const styles = {
     border: 'none',
     cursor: 'pointer',
     transition: 'background-color 0.2s'
-  }
+  },
+  categoryCard: {
+  flex: 1,
+  margin: '0 4px',
+  borderRadius: '16px',
+  padding: '16px 0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease-in-out'
+},
+categoryCircle: {
+  width: '64px',
+  height: '64px',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(0,0,0,0.2)',
+  transition: 'all 0.2s ease-in-out'
+},
+categoryText: {
+  color: '#fff',
+  fontWeight: '600',
+  fontSize: '14px',
+  textAlign: 'center'
+}
+
 };
 
 export default AntiDebtApp;
