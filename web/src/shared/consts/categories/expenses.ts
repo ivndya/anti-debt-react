@@ -3,7 +3,7 @@ import { Category, CategoryMap } from '../../types';
 export const EXPENSE_CATEGORIES: Category[] = [
   {
     id: 'food',
-    name: 'Еда и продукты',
+    name: 'Еда',
     color: '#FF9F43',
   },
   {
