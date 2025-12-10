@@ -7,12 +7,14 @@ import { useTransactions } from '../../../../hooks/useMoney';
 import { TransactionType } from '../../../../shared/types';
 import { INCOME_CATEGORIES } from '../../../../shared/consts/categories/incomes';
 
-export const TransactionNumberPad = ({
-  transactionType,
-}: {
-  transactionType: TransactionType;
-}) => {
+export const TransactionNumberPad = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [transactionType, setTransactionType] =
+    useState<TransactionType>('expense');
+
+  const toggleTransactionType = () => {
+    setTransactionType((prev) => (prev === 'expense' ? 'income' : 'expense'));
+  };
 
   const { amount, resetAmount, handleNumberPress, handleDeletePress } =
     useNumberPad();
@@ -37,7 +39,18 @@ export const TransactionNumberPad = ({
 
   return (
     <>
-      <div className="bg-[#2D2D2D] rounded-2xl p-6 mb-4">
+      <div className="bg-[#2D2D2D] rounded-2xl p-6 mb-4 relative">
+        <button
+          onClick={toggleTransactionType}
+          className={`px-4 py-2 rounded-lg absolute top-5 right-5
+            ${
+              transactionType === 'expense'
+                ? 'bg-red-600 text-white'
+                : 'bg-green-600 text-white'
+            }`}
+        >
+          {transactionType === 'expense' ? 'Расход' : 'Доход'}
+        </button>
         <div className="text-5xl font-bold text-center mb-6 text-white">
           {amount}
         </div>
