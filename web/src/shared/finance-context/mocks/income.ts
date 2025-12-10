@@ -1,4 +1,6 @@
-export const MOCK_INCOMES = [
+import { Income } from '../../types';
+
+export const MOCK_INCOMES: Income[] = [
   {
     id: 1,
     amount: 145000,
