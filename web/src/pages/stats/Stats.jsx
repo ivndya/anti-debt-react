@@ -87,7 +87,7 @@ export const Stats = ({ healthIndex, healthLabel }) => {
             name: monthNames[date.getMonth()],
           };
         }
-        monthsMap[monthKey].income += income.amount;
+        monthsMap[monthKey].income += Number(income.amount);
       });
 
       // Обрабатываем расходы
@@ -106,7 +106,7 @@ export const Stats = ({ healthIndex, healthLabel }) => {
             name: monthNames[date.getMonth()],
           };
         }
-        monthsMap[monthKey].expense += expense.amount;
+        monthsMap[monthKey].expense += Number(expense.amount);
       });
 
       // Преобразуем в массив и сортируем по дате
@@ -135,7 +135,7 @@ export const Stats = ({ healthIndex, healthLabel }) => {
             name: monthNames[date.getMonth()],
           };
         }
-        monthsMap[monthKey].debts += debt.amount;
+        monthsMap[monthKey].debts += Number(debt.amount);
       });
 
       // Преобразуем в массив и сортируем по дате
