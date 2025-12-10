@@ -1,7 +1,8 @@
-/* index.css или глобальные стили */
+@import "tailwindcss";
+
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #000; /* черный фон */
+  background-color: #000;
 }

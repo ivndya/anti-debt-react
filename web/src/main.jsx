@@ -5,17 +5,7 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div
-      style={{
-        margin: 0,
-        padding: 0,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#000', // фон вокруг приложения (можно поменять)
-      }}
-    >
+    <div className="m-0 p-0 flex justify-center items-center min-h-screen bg-black">
       <AntiDebtApp />
     </div>
   </StrictMode>,
