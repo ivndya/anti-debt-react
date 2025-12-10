@@ -1,4 +1,4 @@
-import { X, Check } from 'lucide-react';
+import { X, Check, DeleteIcon } from 'lucide-react';
 
 const rows = [
   ['7', '8', '9'],
@@ -27,7 +27,6 @@ export const NumberPad = ({ onNumberPress, onDelete, onSave }) => {
           onClick={onDelete}
           className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
         >
-          <X size={28} color="white" />
         </button>
         <button
           onClick={() => onNumberPress('0')}
@@ -39,7 +38,7 @@ export const NumberPad = ({ onNumberPress, onDelete, onSave }) => {
           onClick={onSave}
           className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
         >
-          <Check size={28} color="white" />
+          <DeleteIcon size={28} color="white" />
         </button>
       </div>
     </div>
