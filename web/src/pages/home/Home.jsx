@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ExpenseNumberPad } from './components/expense-number-pad/ExpenseNumberPad';
-import { IncomeNumberPad } from './components/income-number-pad copy/IncomeNumberPad';
+import { TransactionNumberPad } from './components/transcation-number-pad/TransactionNumberPad';
 
 export const Home = () => {
   const [type, setType] = useState('expense');
@@ -11,7 +10,11 @@ export const Home = () => {
         <button
           onClick={() => setType('expense')}
           className={`px-4 py-2 rounded-lg 
-            ${type === 'expense' ? 'bg-red-600 text-white' : 'bg-[#2D2D2D] text-gray-400'}`}
+            ${
+              type === 'expense'
+                ? 'bg-red-600 text-white'
+                : 'bg-[#2D2D2D] text-gray-400'
+            }`}
         >
           Расход
         </button>
@@ -19,12 +22,16 @@ export const Home = () => {
         <button
           onClick={() => setType('income')}
           className={`px-4 py-2 rounded-lg 
-            ${type === 'income' ? 'bg-green-600 text-white' : 'bg-[#2D2D2D] text-gray-400'}`}
+            ${
+              type === 'income'
+                ? 'bg-green-600 text-white'
+                : 'bg-[#2D2D2D] text-gray-400'
+            }`}
         >
           Доход
         </button>
       </div>
-      {type === 'expense' ? <ExpenseNumberPad /> : <IncomeNumberPad />}
+      <TransactionNumberPad transactionType={type} />
     </div>
   );
 };

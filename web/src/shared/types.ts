@@ -11,7 +11,7 @@ export interface Expense {
   id: number;
   amount: number;
   categoryId: string;
-  description: string;
+  description?: string;
   date: string;
 }
 
@@ -21,8 +21,8 @@ export interface Income {
   categoryId: string;
   source: string;
   date: string;
-  comment: string;
-  recurring: boolean;
+  comment?: string;
+  recurring?: boolean;
 }
 
 export interface Category {
@@ -34,3 +34,5 @@ export interface Category {
 export interface CategoryMap {
   [key: string]: Category;
 }
+
+export type TransactionType = 'expense' | 'income';
