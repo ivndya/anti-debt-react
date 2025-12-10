@@ -6,7 +6,7 @@ const rows = [
   ['1', '2', '3'],
 ];
 
-export const NumberPad = ({ onNumberPress, onDelete, onSave }) => {
+export const NumberPad = ({ onNumberPress, onDelete }) => {
   return (
     <div className="flex flex-col gap-2">
       {rows.map((row, i) => (
@@ -23,11 +23,7 @@ export const NumberPad = ({ onNumberPress, onDelete, onSave }) => {
         </div>
       ))}
       <div className="flex gap-2">
-        <button
-          onClick={onDelete}
-          className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
-        >
-        </button>
+        <button className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"></button>
         <button
           onClick={() => onNumberPress('0')}
           className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
@@ -35,7 +31,7 @@ export const NumberPad = ({ onNumberPress, onDelete, onSave }) => {
           <span className="text-white text-2xl font-bold">0</span>
         </button>
         <button
-          onClick={onSave}
+          onClick={onDelete}
           className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
         >
           <DeleteIcon size={28} color="white" />

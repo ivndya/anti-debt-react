@@ -3,14 +3,13 @@ import { useFinance } from '../shared/finance-context/FinanceContext';
 export const useDebts = () => {
   const { debts, setDebts } = useFinance();
 
-  const addDebt = ({ amount, category, categoryColor, debtor }) => {
+  const addDebt = ({ amount, categoryId, lender }) => {
     const newDebt = {
       id: Date.now(),
       amount: parseInt(amount, 10),
-      category,
-      categoryColor,
-      debtor,
-      date: new Date().toISOString(),
+      categoryId,
+      lender,
+      date: new Date().toLocaleString(),
       paid: false,
     };
 
@@ -30,7 +29,10 @@ export const useDebts = () => {
 
     const monthlyDebts = debts.filter((debt) => {
       const debtDate = new Date(debt.date);
-      return debtDate.getMonth() === currentMonth && debtDate.getFullYear() === currentYear;
+      return (
+        debtDate.getMonth() === currentMonth &&
+        debtDate.getFullYear() === currentYear
+      );
     });
 
     const newDebts = monthlyDebts.filter((d) => !d.paid).length;
@@ -41,7 +43,9 @@ export const useDebts = () => {
   };
 
   const calculateFinancialHealth = () => {
-    const totalDebt = debts.filter((d) => !d.paid).reduce((sum, d) => sum + d.amount, 0);
+    const totalDebt = debts
+      .filter((d) => !d.paid)
+      .reduce((sum, d) => sum + d.amount, 0);
 
     if (totalDebt === 0) return 0;
     if (totalDebt < 5000) return 1;

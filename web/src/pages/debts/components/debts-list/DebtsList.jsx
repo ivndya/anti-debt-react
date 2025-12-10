@@ -28,12 +28,18 @@ export const DebtsList = ({ debts, onDeleteDebt }) => {
               <div className="flex items-center mb-1">
                 <div
                   className="w-3 h-3 rounded-full mr-2"
-                  style={{ backgroundColor: debt.categoryColor }}
+                  style={{ backgroundColor: category.color }}
                 />
-                <span className="font-semibold text-lg text-white">{debt.amount} ₽</span>
+                <span className="font-semibold text-lg text-white">
+                  {debt.amount} ₽
+                </span>
               </div>
-              <div className="text-gray-400 text-sm mb-0.5">Должен: {debt.debtor}</div>
-              <div className="text-gray-500 text-xs">Категория: {category.name}</div>
+              <div className="text-gray-400 text-sm mb-0.5">
+                Должен: {debt.lender}
+              </div>
+              <div className="text-gray-500 text-xs">
+                Категория: {category.name}
+              </div>
             </div>
             <button
               onClick={() => onDeleteDebt(debt.id)}

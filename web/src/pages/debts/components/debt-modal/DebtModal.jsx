@@ -1,4 +1,10 @@
-export const DebtModal = ({ open, debtorName, onChangeDebtorName, onCancel, onConfirm }) => {
+export const DebtModal = ({
+  open,
+  lenderName,
+  onchangeLenderName,
+  onCancel,
+  onConfirm,
+}) => {
   if (!open) return null;
 
   return (
@@ -7,8 +13,8 @@ export const DebtModal = ({ open, debtorName, onChangeDebtorName, onCancel, onCo
         <h2 className="text-xl font-bold mb-4 text-white">Кому вы должны?</h2>
         <input
           type="text"
-          value={debtorName}
-          onChange={(e) => onChangeDebtorName(e.target.value)}
+          value={lenderName}
+          onChange={(e) => onchangeLenderName(e.target.value)}
           placeholder="Введите имя"
           className="w-full border border-[#3D3D3D] rounded-lg p-3 mb-4 bg-[#1A1A1A] text-white text-base outline-none focus:border-gray-500"
         />
