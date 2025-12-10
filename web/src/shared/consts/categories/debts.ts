@@ -1,4 +1,6 @@
-export const DEBT_CATEGORIES = [
+import { Category, CategoryMap } from '../../types';
+
+export const DEBT_CATEGORIES: Category[] = [
   {
     id: 'personal',
     name: 'Личные',
@@ -21,7 +23,7 @@ export const DEBT_CATEGORIES = [
   },
 ];
 
-export const DEBT_CATEGORIES_MAP = DEBT_CATEGORIES.reduce((acc, category) => {
+export const DEBT_CATEGORIES_MAP: CategoryMap = DEBT_CATEGORIES.reduce((acc, category) => {
   acc[category.id] = category;
   return acc;
 }, {});

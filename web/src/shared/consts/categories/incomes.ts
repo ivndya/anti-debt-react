@@ -1,4 +1,6 @@
-export const INCOME_CATEGORIES = [
+import { Category, CategoryMap } from '../../types';
+
+export const INCOME_CATEGORIES: Category[] = [
   {
     id: 'salary',
     name: 'Зарплата',
@@ -21,7 +23,7 @@ export const INCOME_CATEGORIES = [
   },
 ];
 
-export const INCOME_CATEGORIES_MAP = INCOME_CATEGORIES.reduce((acc, category) => {
+export const INCOME_CATEGORIES_MAP: CategoryMap = INCOME_CATEGORIES.reduce((acc, category) => {
   acc[category.id] = category;
   return acc;
 }, {});

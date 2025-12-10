@@ -1,4 +1,6 @@
-export const MOCK_DEBTS = [
+import { Debt } from '../../types';
+
+export const MOCK_DEBTS: Debt[] = [
   {
     id: 101,
     amount: 2500,
