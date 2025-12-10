@@ -17,9 +17,7 @@ export const Debts = () => {
       <DebtsNumberPad addDebt={addDebt} />
 
       <div className="bg-[#2D2D2D] rounded-2xl p-4 mb-4">
-        <div className="text-sm leading-relaxed text-gray-300">
-          {randomTip.text}
-        </div>
+        <div className="text-sm leading-relaxed text-gray-300">{randomTip.text}</div>
       </div>
 
       <div className="flex justify-between items-center mb-3">
