@@ -116,12 +116,12 @@ export const Stats = ({ healthIndex, healthLabel }) => {
   }, [incomes, expenses, debts, showIncome, showExpense, chartMode]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 w-full box-border">
+    <div className="flex-1 overflow-y-auto p-4 w-full box-border [&_*]:!outline-none">
       <div className="bg-[#2D2D2D] rounded-2xl p-4 mb-4">
         <div className="text-lg font-semibold mb-4 text-white">Финансовая статистика</div>
 
         {/* График расходов/доходов */}
-        <div className="bg-[#3D3D3D] rounded-xl mb-4 p-4">
+        <div className="bg-[#3D3D3D] rounded-xl mb-4 p-4 [&_.recharts-surface]:outline-none [&_.recharts-wrapper]:outline-none">
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#555" />

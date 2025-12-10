@@ -6,3 +6,16 @@ html, body {
   height: 100%;
   background-color: #000;
 }
+
+/* Убираем outline с графиков Recharts */
+.recharts-surface,
+.recharts-wrapper,
+.recharts-bar-rectangle,
+.recharts-layer {
+  outline: none !important;
+}
+
+.recharts-surface:focus,
+.recharts-wrapper:focus {
+  outline: none !important;
+}
