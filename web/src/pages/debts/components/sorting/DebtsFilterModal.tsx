@@ -26,8 +26,11 @@ export const DebtsFiltersModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50">
-      <div className="bg-[#2D2D2D] rounded-t-2xl w-full max-w-[448px] p-4 pb-6">
+    <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50" onClick={onClose}>
+      <div
+        className="bg-[#2D2D2D] rounded-t-2xl w-full max-w-[448px] p-4 pb-6"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-white text-lg font-semibold">Фильтры</h2>
           <button
