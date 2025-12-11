@@ -1,4 +1,4 @@
-import { X, Check, DeleteIcon } from 'lucide-react';
+import { DeleteIcon } from 'lucide-react';
 
 const rows = [
   ['7', '8', '9'],
@@ -23,7 +23,13 @@ export const NumberPad = ({ onNumberPress, onDelete }) => {
         </div>
       ))}
       <div className="flex gap-2">
-        <button className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"></button>
+        <button
+  onClick={() => onNumberPress('.')} // <-- добавить обработчик
+  className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+>
+  <span className="text-white text-2xl font-bold">.</span>
+</button>
+
         <button
           onClick={() => onNumberPress('0')}
           className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"

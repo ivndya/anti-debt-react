@@ -4,10 +4,26 @@ export const useNumberPad = () => {
   const [amount, setAmount] = useState('0');
 
   const handleNumberPress = (num: string) => {
+    if (num === '.') {
+      // добавляем точку только один раз
+      if (!amount.includes('.')) {
+        setAmount(amount + '.');
+      }
+      return;
+    }
+
     if (amount === '0') {
       setAmount(num);
     } else {
-      setAmount(amount + num);
+      if (amount.includes('.')) {
+        const [integerPart, decimalPart] = amount.split('.');
+        // ограничение до 2 знаков после точки
+        if (decimalPart.length < 2) {
+          setAmount(amount + num);
+        }
+      } else {
+        setAmount(amount + num);
+      }
     }
   };
 
@@ -19,9 +35,7 @@ export const useNumberPad = () => {
     }
   };
 
-  const resetAmount = () => {
-    setAmount('0');
-  };
+  const resetAmount = () => setAmount('0');
 
   return { amount, resetAmount, handleNumberPress, handleDeletePress };
 };
