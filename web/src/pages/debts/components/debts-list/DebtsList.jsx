@@ -7,8 +7,6 @@ export const DebtsList = ({ debts, onDeleteDebt }) => {
       <div className="bg-[#2D2D2D] rounded-2xl p-8 text-center">
         <div className="text-gray-500">
           Долгов пока нет.
-          <br />
-          Добавьте первый долг на главном экране.
         </div>
       </div>
     );
