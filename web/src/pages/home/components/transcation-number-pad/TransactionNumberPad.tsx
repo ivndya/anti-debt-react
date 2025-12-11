@@ -40,7 +40,7 @@ export const TransactionNumberPad = () => {
 
   return (
     <>
-      <div className="bg-[#2D2D2D] rounded-2xl p-6 mb-4 relative">
+      <div className="p-6 mb-4 relative">
         <button
           onClick={toggleTransactionType}
           className={`px-4 py-2 rounded-lg absolute top-5 right-5

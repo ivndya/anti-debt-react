@@ -24,11 +24,11 @@ export const NumberPad = ({ onNumberPress, onDelete }) => {
       ))}
       <div className="flex gap-2">
         <button
-  onClick={() => onNumberPress('.')} // <-- добавить обработчик
-  className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
->
-  <span className="text-white text-2xl font-bold">.</span>
-</button>
+          onClick={() => onNumberPress('.')}
+          className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+        >
+          <span className="text-white text-2xl font-bold">.</span>
+        </button>
 
         <button
           onClick={() => onNumberPress('0')}

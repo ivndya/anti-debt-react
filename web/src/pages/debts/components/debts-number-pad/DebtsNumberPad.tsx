@@ -49,7 +49,7 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
 
   return (
     <>
-      <div className="bg-[#2D2D2D] rounded-2xl p-6 mb-4">
+      <div className="p-6 mb-4">
         <div className="text-5xl font-bold text-center mb-6 text-white flex items-center justify-center gap-2">
           <span>{amount}</span>
           <RussianRuble size={40} color="white" />
