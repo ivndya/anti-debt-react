@@ -75,12 +75,18 @@ export const TransactionNumberPad = () => {
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-[#3D3D3D] p-4 rounded-lg mt-4 border-none cursor-pointer transition-colors duration-200 hover:bg-[#4D4D4D]"
+          disabled={amount === '0' || amount === '0.'}
+          className={`w-full p-4 rounded-lg mt-4 border-none cursor-pointer transition-colors duration-200 
+    ${amount === '0' || amount === '0.'
+              ? 'bg-[#3D3D3D] cursor-not-allowed'
+              : 'bg-gray-600 hover:bg-green-500'}`
+          }
         >
           <span className="text-center text-lg font-semibold text-white">
             Сохранить
           </span>
         </button>
+
       </div>
     </>
   );
