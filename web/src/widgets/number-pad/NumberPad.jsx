@@ -8,39 +8,44 @@ const rows = [
 
 export const NumberPad = ({ onNumberPress, onDelete }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       {rows.map((row, i) => (
-        <div key={i} className="flex gap-2">
+        <div key={i} className="flex gap-3">
           {row.map((num) => (
             <button
               key={num}
               onClick={() => onNumberPress(num)}
-              className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+              className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+                hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
             >
-              <span className="text-white text-2xl font-bold">{num}</span>
+              {num}
             </button>
           ))}
         </div>
       ))}
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <button
           onClick={() => onNumberPress('.')}
-          className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+            hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
         >
-          <span className="text-white text-2xl font-bold">.</span>
+          .
         </button>
 
         <button
           onClick={() => onNumberPress('0')}
-          className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+            hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
         >
-          <span className="text-white text-2xl font-bold">0</span>
+          0
         </button>
+
         <button
           onClick={onDelete}
-          className="flex-1 bg-black h-16 rounded-lg flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-red-500 to-red-700 shadow-lg text-white flex items-center justify-center cursor-pointer transition-all duration-200 
+            hover:scale-105 active:scale-95"
         >
-          <DeleteIcon size={28} color="white" />
+          <DeleteIcon size={28} />
         </button>
       </div>
     </div>
