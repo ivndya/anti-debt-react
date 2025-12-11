@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export interface Debt {
   id: number;
   amount: number;
@@ -29,6 +31,7 @@ export interface Category {
   id: string;
   name: string;
   color: string;
+  icon: LucideIcon
 }
 
 export interface CategoryMap {

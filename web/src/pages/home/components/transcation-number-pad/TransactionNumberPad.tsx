@@ -6,6 +6,7 @@ import { EXPENSE_CATEGORIES } from '../../../../shared/consts/categories/expense
 import { useTransactions } from '../../../../hooks/useMoney';
 import { TransactionType } from '../../../../shared/types';
 import { INCOME_CATEGORIES } from '../../../../shared/consts/categories/incomes';
+import { RussianRuble } from 'lucide-react';
 
 export const TransactionNumberPad = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -43,16 +44,16 @@ export const TransactionNumberPad = () => {
         <button
           onClick={toggleTransactionType}
           className={`px-4 py-2 rounded-lg absolute top-5 right-5
-            ${
-              transactionType === 'expense'
-                ? 'bg-red-600 text-white'
-                : 'bg-green-600 text-white'
+            ${transactionType === 'expense'
+              ? 'bg-red-600 text-white'
+              : 'bg-green-600 text-white'
             }`}
         >
           {transactionType === 'expense' ? 'Расход' : 'Доход'}
         </button>
-        <div className="text-5xl font-bold text-center mb-6 text-white">
-          {amount}
+        <div className="text-5xl font-bold text-center mb-6 text-white flex items-center justify-center gap-2">
+          <span>{amount}</span>
+          <RussianRuble size={40} color="white" />
         </div>
 
         <CategoryTabs

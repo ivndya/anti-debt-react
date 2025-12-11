@@ -1,3 +1,4 @@
+import { Gift, HandCoins, Monitor, TrendingUp } from 'lucide-react';
 import { Category, CategoryMap } from '../../types';
 
 export const INCOME_CATEGORIES: Category[] = [
@@ -5,21 +6,25 @@ export const INCOME_CATEGORIES: Category[] = [
     id: 'salary',
     name: 'Зарплата',
     color: '#4CAF50',
+    icon: HandCoins
   },
   {
     id: 'freelance',
     name: 'Фриланс',
     color: '#2196F3',
+    icon: Monitor
   },
   {
     id: 'investments',
     name: 'Инвестиции',
     color: '#FFC107',
+    icon: TrendingUp
   },
   {
     id: 'gifts',
     name: 'Подарки',
     color: '#9C27B0',
+    icon: Gift
   },
 ];
 
