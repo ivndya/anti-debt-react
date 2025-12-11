@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useNumberPad } from '../../../../hooks/useNumberPad';
-import { DEBT_CATEGORIES } from '../../../../shared/consts/categories/debts';
-import { CategoryTabs } from '../../../../widgets/category-tabs/CategoryTabs';
-import { NumberPad } from '../../../../widgets/number-pad/NumberPad';
-import { DebtModal } from '../debt-modal/DebtModal';
-import { RussianRuble } from 'lucide-react';
+import { useState } from 'react'
+import { useNumberPad } from '../../../../hooks/useNumberPad'
+import { DEBT_CATEGORIES } from '../../../../shared/consts/categories/debts'
+import { CategoryTabs } from '../../../../widgets/category-tabs/CategoryTabs'
+import { NumberPad } from '../../../../widgets/number-pad/NumberPad'
+import { DebtModal } from '../debt-modal/DebtModal'
+import { RussianRuble } from 'lucide-react'
 
 interface DebtsNumberPadProps {
   addDebt: ({
@@ -12,40 +12,39 @@ interface DebtsNumberPadProps {
     categoryId,
     lender,
   }: {
-    amount: string;
-    categoryId: string;
-    lender: string;
-  }) => void;
+    amount: string
+    categoryId: string
+    lender: string
+  }) => void
 }
 
 export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
-  const [isDebtModalOpen, setIsDebtModalOpen] = useState(false);
-  const [lenderName, setLenderName] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(0)
+  const [isDebtModalOpen, setIsDebtModalOpen] = useState(false)
+  const [lenderName, setLenderName] = useState('')
 
-  const { amount, resetAmount, handleNumberPress, handleDeletePress } =
-    useNumberPad();
+  const { amount, resetAmount, handleNumberPress, handleDeletePress } = useNumberPad()
 
   const handleOnSave = () => {
     if (amount && amount !== '0') {
-      setIsDebtModalOpen(true);
+      setIsDebtModalOpen(true)
     }
-  };
+  }
 
   const handleSubmit = () => {
     if (lenderName.trim()) {
-      const { id } = DEBT_CATEGORIES[selectedCategory];
+      const { id } = DEBT_CATEGORIES[selectedCategory]
       addDebt({
         amount,
         categoryId: id,
         lender: lenderName.trim(),
-      });
+      })
 
-      resetAmount();
-      setLenderName('');
-      setIsDebtModalOpen(false);
+      resetAmount()
+      setLenderName('')
+      setIsDebtModalOpen(false)
     }
-  };
+  }
 
   return (
     <>
@@ -61,23 +60,19 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
           onSelectCategory={setSelectedCategory}
         />
 
-        <NumberPad
-          onNumberPress={handleNumberPress}
-          onDelete={handleDeletePress}
-        />
+        <NumberPad onNumberPress={handleNumberPress} onDelete={handleDeletePress} />
 
         <button
           onClick={handleOnSave}
           disabled={amount === '0' || amount === '0.'}
           className={`w-full p-4 rounded-lg mt-4 border-none cursor-pointer transition-colors duration-200 
-    ${amount === '0' || amount === '0.'
-              ? 'bg-[#3D3D3D] cursor-not-allowed'
-              : 'bg-gray-600 hover:bg-green-500'}`
-          }
+    ${
+      amount === '0' || amount === '0.'
+        ? 'bg-[#3D3D3D] cursor-not-allowed'
+        : 'bg-gray-600 hover:bg-green-500'
+    }`}
         >
-          <span className="text-center text-lg font-semibold text-white">
-            Сохранить
-          </span>
+          <span className="text-center text-lg font-semibold text-white">Сохранить</span>
         </button>
       </div>
 
@@ -85,12 +80,12 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
         open={isDebtModalOpen}
         lenderName={lenderName}
         onCancel={() => {
-          setIsDebtModalOpen(false);
-          setLenderName('');
+          setIsDebtModalOpen(false)
+          setLenderName('')
         }}
         onchangeLenderName={setLenderName}
         onConfirm={handleSubmit}
       />
     </>
-  );
-};
+  )
+}

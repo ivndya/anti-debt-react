@@ -1,8 +1,8 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import AntiDebtApp from './App';
-import { FinanceProvider } from './shared/finance-context/FinanceProvider';
-import './index.css';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import AntiDebtApp from './App'
+import { FinanceProvider } from './shared/finance-context/FinanceProvider'
+import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,4 +12,4 @@ createRoot(document.getElementById('root')).render(
       </div>
     </FinanceProvider>
   </StrictMode>,
-);
+)

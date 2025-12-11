@@ -1,4 +1,4 @@
-import { Expense } from '../../types';
+import { Expense } from '../../types'
 
 export const MOCK_EXPENSES: Expense[] = [
   {
@@ -71,4 +71,4 @@ export const MOCK_EXPENSES: Expense[] = [
     description: 'iCloud 200 ГБ',
     date: '2025-03-01T00:15:00.000Z',
   },
-];
+]

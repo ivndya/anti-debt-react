@@ -1,11 +1,13 @@
-export const DebtModal = ({
+import { DebtModalProps } from '../../../../shared/types'
+
+export const DebtModal: React.FC<DebtModalProps> = ({
   open,
   lenderName,
   onchangeLenderName,
   onCancel,
   onConfirm,
 }) => {
-  if (!open) return null;
+  if (!open) return null
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
@@ -34,5 +36,5 @@ export const DebtModal = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

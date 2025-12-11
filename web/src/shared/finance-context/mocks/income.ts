@@ -1,4 +1,4 @@
-import { Income } from '../../types';
+import { Income } from '../../types'
 
 export const MOCK_INCOMES: Income[] = [
   {
@@ -91,4 +91,4 @@ export const MOCK_INCOMES: Income[] = [
     comment: 'Кешбэк плюс проценты по вкладу',
     recurring: true,
   },
-];
+]

@@ -1,16 +1,16 @@
-import { X } from 'lucide-react';
-import { DebtsFilters } from './DebtsFilter';
-import type { DebtsFilterMode, DebtsSortField, DebtsSortDirection } from './types';
+import { X } from 'lucide-react'
+import { DebtsFilters } from './DebtsFilter'
+import type { DebtsFilterMode, DebtsSortField, DebtsSortDirection } from './types'
 
 interface DebtsFiltersModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  filterMode: DebtsFilterMode;
-  sortField: DebtsSortField;
-  sortDirection: DebtsSortDirection;
-  onFilterModeChange: (mode: DebtsFilterMode) => void;
-  onSortFieldChange: (field: DebtsSortField) => void;
-  onToggleSortDirection: () => void;
+  isOpen: boolean
+  onClose: () => void
+  filterMode: DebtsFilterMode
+  sortField: DebtsSortField
+  sortDirection: DebtsSortDirection
+  onFilterModeChange: (mode: DebtsFilterMode) => void
+  onSortFieldChange: (field: DebtsSortField) => void
+  onToggleSortDirection: () => void
 }
 
 export const DebtsFiltersModal = ({
@@ -23,7 +23,7 @@ export const DebtsFiltersModal = ({
   onSortFieldChange,
   onToggleSortDirection,
 }: DebtsFiltersModalProps) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-end justify-center z-50" onClick={onClose}>
@@ -52,5 +52,5 @@ export const DebtsFiltersModal = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}

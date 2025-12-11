@@ -1,4 +1,4 @@
-import { Debt } from '../../types';
+import { Debt } from '../../types'
 
 export const MOCK_DEBTS: Debt[] = [
   {
@@ -81,4 +81,4 @@ export const MOCK_DEBTS: Debt[] = [
     date: '2025-03-20T19:30:00.000Z',
     paid: false,
   },
-];
+]

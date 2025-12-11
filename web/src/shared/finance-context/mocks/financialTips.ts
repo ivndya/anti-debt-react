@@ -1,6 +1,6 @@
 export interface FinancialTip {
-  id: number;
-  text: string;
+  id: number
+  text: string
 }
 
 export const FINANCIAL_TIPS: FinancialTip[] = [
@@ -9,4 +9,4 @@ export const FINANCIAL_TIPS: FinancialTip[] = [
   { id: 3, text: 'Погашайте самые дорогие долги в первую очередь' },
   { id: 4, text: 'Составьте бюджет на неделю и придерживайтесь его' },
   { id: 5, text: 'Избегайте лишних кредитов и покупок в рассрочку' },
-];
+]

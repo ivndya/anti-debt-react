@@ -1,12 +1,13 @@
-import { DeleteIcon } from 'lucide-react';
+import { DeleteIcon } from 'lucide-react'
+import { NumberPadProps } from '../../shared/types'
 
 const rows = [
   ['7', '8', '9'],
   ['4', '5', '6'],
   ['1', '2', '3'],
-];
+]
 
-export const NumberPad = ({ onNumberPress, onDelete }) => {
+export const NumberPad: React.FC<NumberPadProps> = ({ onNumberPress, onDelete }) => {
   return (
     <div className="flex flex-col gap-3">
       {rows.map((row, i) => (
@@ -49,5 +50,5 @@ export const NumberPad = ({ onNumberPress, onDelete }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,12 +1,13 @@
-import { Home, DollarSign, BarChart3 } from 'lucide-react';
+import { Home, DollarSign, BarChart3 } from 'lucide-react'
+import { BottomNavProps } from '../../shared/types'
 
 const NAV_ITEMS = [
   { id: 'home', icon: Home },
   { id: 'debts', icon: DollarSign },
   { id: 'stats', icon: BarChart3 },
-];
+]
 
-export const BottomNav = ({ activeScreen, onChange }) => {
+export const BottomNav: React.FC<BottomNavProps> = ({ activeScreen, onChange }) => {
   return (
     <div className="flex bg-[#2D2D2D] rounded-t-3xl pt-4 pb-8 w-full box-border">
       {NAV_ITEMS.map((item) => (
@@ -25,5 +26,5 @@ export const BottomNav = ({ activeScreen, onChange }) => {
         </button>
       ))}
     </div>
-  );
-};
+  )
+}

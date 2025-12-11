@@ -1,23 +1,23 @@
-import type { DebtsFilterMode, DebtsSortField, DebtsSortDirection } from './types';
+import type { DebtsFilterMode, DebtsSortField, DebtsSortDirection } from './types'
 
 interface DebtsFiltersProps {
-  filterMode: DebtsFilterMode;
-  sortField: DebtsSortField;
-  sortDirection: DebtsSortDirection;
-  onFilterModeChange: (mode: DebtsFilterMode) => void;
-  onSortFieldChange: (field: DebtsSortField) => void;
-  onToggleSortDirection: () => void;
+  filterMode: DebtsFilterMode
+  sortField: DebtsSortField
+  sortDirection: DebtsSortDirection
+  onFilterModeChange: (mode: DebtsFilterMode) => void
+  onSortFieldChange: (field: DebtsSortField) => void
+  onToggleSortDirection: () => void
 }
 
 const FILTER_OPTIONS: { label: string; value: DebtsFilterMode }[] = [
   { label: 'Только невыплаченные', value: 'unpaid' },
   { label: 'Все долги', value: 'all' },
-];
+]
 
 const SORT_FIELD_OPTIONS: { label: string; value: DebtsSortField }[] = [
   { label: 'По дате', value: 'date' },
   { label: 'По сумме', value: 'amount' },
-];
+]
 
 export const DebtsFilters = ({
   filterMode,
@@ -27,7 +27,7 @@ export const DebtsFilters = ({
   onSortFieldChange,
   onToggleSortDirection,
 }: DebtsFiltersProps) => {
-  const isDateSort = sortField === 'date';
+  const isDateSort = sortField === 'date'
 
   return (
     <div className="flex flex-col gap-4 text-sm text-gray-300">
@@ -76,8 +76,8 @@ export const DebtsFilters = ({
               ? 'Новые → старые'
               : 'Старые → новые'
             : sortDirection === 'desc'
-            ? 'Сумма: по убыв.'
-            : 'Сумма: по возр.'}
+              ? 'Сумма: по убыв.'
+              : 'Сумма: по возр.'}
         </button>
       </div>
 
@@ -113,5 +113,5 @@ export const DebtsFilters = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,14 +1,14 @@
-import { DebtsList } from './components/debts-list/DebtsList';
-import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad';
-import { useDebts } from '../../hooks/useDebts';
-import { FINANCIAL_TIPS } from '../../shared/finance-context/mocks/financialTips';
-import { useMemo } from 'react';
-import { useDebtsView } from './components/sorting/hooks/useDebtsView';
-import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal';
-import { useToggle } from '../../shared/hooks/useToggle';
+import { DebtsList } from './components/debts-list/DebtsList'
+import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
+import { useDebts } from '../../hooks/useDebts'
+import { FINANCIAL_TIPS } from '../../shared/finance-context/mocks/financialTips'
+import { useMemo } from 'react'
+import { useDebtsView } from './components/sorting/hooks/useDebtsView'
+import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal'
+import { useToggle } from '../../shared/hooks/useToggle'
 
 export const Debts = () => {
-  const { debts, addDebt, deleteDebt } = useDebts();
+  const { debts, addDebt, deleteDebt } = useDebts()
 
   const {
     sortedDebts,
@@ -18,14 +18,14 @@ export const Debts = () => {
     sortDirection,
     setSortField,
     toggleSortDirection,
-  } = useDebtsView({ debts });
+  } = useDebtsView({ debts })
 
   const randomTip = useMemo(() => {
-    const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length);
-    return FINANCIAL_TIPS[randomIndex];
-  }, []);
+    const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length)
+    return FINANCIAL_TIPS[randomIndex]
+  }, [])
 
-  const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle();
+  const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
 
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
@@ -59,5 +59,5 @@ export const Debts = () => {
         onToggleSortDirection={toggleSortDirection}
       />
     </div>
-  );
-};
+  )
+}

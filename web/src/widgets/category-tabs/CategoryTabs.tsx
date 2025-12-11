@@ -1,8 +1,14 @@
-export const CategoryTabs = ({ categories, selectedCategory, onSelectCategory }) => {
+import { CategoryTabsProps } from '../../shared/types'
+
+export const CategoryTabs: React.FC<CategoryTabsProps> = ({
+  categories,
+  selectedCategory,
+  onSelectCategory,
+}) => {
   return (
     <div className="flex justify-around mb-6">
       {categories.map((cat, idx) => {
-        const Icon = cat.icon;
+        const Icon = cat.icon
 
         return (
           <button
@@ -17,8 +23,8 @@ export const CategoryTabs = ({ categories, selectedCategory, onSelectCategory })
           >
             <Icon size={28} color={selectedCategory === idx ? 'white' : cat.color} />
           </button>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}

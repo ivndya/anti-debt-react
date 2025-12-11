@@ -1,21 +1,20 @@
-import { Trash2 } from 'lucide-react';
-import { DEBT_CATEGORIES_MAP } from '../../../../shared/consts/categories/debts';
+import { Trash2 } from 'lucide-react'
+import { DEBT_CATEGORIES_MAP } from '../../../../shared/consts/categories/debts'
+import { Debt, DebtsListProps } from '../../../../shared/types'
 
-export const DebtsList = ({ debts, onDeleteDebt }) => {
+export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => {
   if (debts.length === 0) {
     return (
       <div className="bg-[#2D2D2D] rounded-2xl p-8 text-center">
-        <div className="text-gray-500">
-          Долгов пока нет.
-        </div>
+        <div className="text-gray-500">Долгов пока нет.</div>
       </div>
-    );
+    )
   }
 
   return (
     <div>
       {debts.map((debt) => {
-        const category = DEBT_CATEGORIES_MAP[debt.categoryId];
+        const category = DEBT_CATEGORIES_MAP[debt.categoryId]
 
         return (
           <div
@@ -28,16 +27,10 @@ export const DebtsList = ({ debts, onDeleteDebt }) => {
                   className="w-3 h-3 rounded-full mr-2"
                   style={{ backgroundColor: category.color }}
                 />
-                <span className="font-semibold text-lg text-white">
-                  {debt.amount} ₽
-                </span>
+                <span className="font-semibold text-lg text-white">{debt.amount} ₽</span>
               </div>
-              <div className="text-gray-400 text-sm mb-0.5">
-                Должен: {debt.lender}
-              </div>
-              <div className="text-gray-500 text-xs">
-                Категория: {category.name}
-              </div>
+              <div className="text-gray-400 text-sm mb-0.5">Должен: {debt.lender}</div>
+              <div className="text-gray-500 text-xs">Категория: {category.name}</div>
             </div>
             <button
               onClick={() => onDeleteDebt(debt.id)}
@@ -46,8 +39,8 @@ export const DebtsList = ({ debts, onDeleteDebt }) => {
               <Trash2 size={20} color="white" />
             </button>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
