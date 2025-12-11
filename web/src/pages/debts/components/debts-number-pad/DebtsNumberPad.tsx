@@ -4,6 +4,7 @@ import { DEBT_CATEGORIES } from '../../../../shared/consts/categories/debts';
 import { CategoryTabs } from '../../../../widgets/category-tabs/CategoryTabs';
 import { NumberPad } from '../../../../widgets/number-pad/NumberPad';
 import { DebtModal } from '../debt-modal/DebtModal';
+import { RussianRuble } from 'lucide-react';
 
 interface DebtsNumberPadProps {
   addDebt: ({
@@ -49,8 +50,9 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
   return (
     <>
       <div className="bg-[#2D2D2D] rounded-2xl p-6 mb-4">
-        <div className="text-5xl font-bold text-center mb-6 text-white">
-          {amount}
+        <div className="text-5xl font-bold text-center mb-6 text-white flex items-center justify-center gap-2">
+          <span>{amount}</span>
+          <RussianRuble size={40} color="white" />
         </div>
 
         <CategoryTabs
