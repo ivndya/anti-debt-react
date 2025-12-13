@@ -2,7 +2,7 @@ import { DebtsList } from './components/debts-list/DebtsList'
 import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
 import { useDebts } from '../../hooks/useDebts'
 import { FINANCIAL_TIPS } from '../../shared/finance-context/mocks/financialTips'
-import { useMemo } from 'react'
+import { useState } from 'react'
 import { useDebtsView } from './components/sorting/hooks/useDebtsView'
 import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal'
 import { useToggle } from '../../shared/hooks/useToggle'
@@ -20,10 +20,11 @@ export const Debts = () => {
     toggleSortDirection,
   } = useDebtsView({ debts })
 
-  const randomTip = useMemo(() => {
+  // Случайный совет выбирается один раз при монтировании
+  const [randomTip] = useState(() => {
     const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length)
     return FINANCIAL_TIPS[randomIndex]
-  }, [])
+  })
 
   const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
 

@@ -26,13 +26,26 @@ interface MonthDataDebts {
   Долги: number
 }
 
+interface MonthMapFinance {
+  income: number
+  expense: number
+  date: Date
+  name: string
+}
+
+interface MonthMapDebts {
+  debts: number
+  date: Date
+  name: string
+}
+
 // Тип объединённой транзакции
 type TransactionItem =
   | (Income & { type: 'income' })
   | (Expense & { type: 'expense' })
   | (Debt & { type: 'debt' })
 
-export const Stats: React.FC<StatsProps> = ({ stats, healthIndex, healthLabel }) => {
+export const Stats: React.FC<StatsProps> = ({ stats }) => {
   const [chartMode, setChartMode] = useState<'finance' | 'debts'>('finance')
   const [showIncome, setShowIncome] = useState(true)
   const [showExpense, setShowExpense] = useState(true)
@@ -41,7 +54,6 @@ export const Stats: React.FC<StatsProps> = ({ stats, healthIndex, healthLabel })
 
   // ----------------- Данные для графика -----------------
   const chartData = useMemo(() => {
-    const monthsMap: Record<string, any> = {}
     const monthNames = [
       'Янв',
       'Фев',
@@ -58,6 +70,8 @@ export const Stats: React.FC<StatsProps> = ({ stats, healthIndex, healthLabel })
     ]
 
     if (chartMode === 'finance') {
+      const monthsMap: Record<string, MonthMapFinance> = {}
+
       incomes.forEach((income) => {
         const date = new Date(income.date)
         const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
@@ -84,6 +98,8 @@ export const Stats: React.FC<StatsProps> = ({ stats, healthIndex, healthLabel })
         .sort((a, b) => a.date.getTime() - b.date.getTime())
         .slice(-6) as MonthDataFinance[]
     } else {
+      const monthsMap: Record<string, MonthMapDebts> = {}
+
       debts.forEach((debt) => {
         const date = new Date(debt.date)
         const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`

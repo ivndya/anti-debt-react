@@ -1,10 +1,16 @@
 import { useFinance } from '../shared/finance-context/FinanceContext'
 import { Debt } from '../shared/types'
 
+interface AddDebtParams {
+  amount: string
+  categoryId: string
+  lender: string
+}
+
 export const useDebts = () => {
   const { debts, setDebts } = useFinance()
 
-  const addDebt = ({ amount, categoryId, lender }) => {
+  const addDebt = ({ amount, categoryId, lender }: AddDebtParams) => {
     const newDebt: Debt = {
       id: Date.now(),
       amount: parseInt(amount, 10),
@@ -17,7 +23,7 @@ export const useDebts = () => {
     setDebts((prev) => [...prev, newDebt])
   }
 
-  const deleteDebt = (id) => {
+  const deleteDebt = (id: number) => {
     const updatedDebts = debts.filter((d) => d.id !== id)
 
     setDebts(updatedDebts)

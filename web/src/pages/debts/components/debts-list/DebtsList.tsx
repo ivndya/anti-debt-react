@@ -1,6 +1,6 @@
 import { Trash2 } from 'lucide-react'
 import { DEBT_CATEGORIES_MAP } from '../../../../shared/consts/categories/debts'
-import { Debt, DebtsListProps } from '../../../../shared/types'
+import { DebtsListProps } from '../../../../shared/types'
 
 export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => {
   if (debts.length === 0) {

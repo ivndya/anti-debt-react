@@ -1,5 +1,5 @@
 import { Category, CategoryMap } from '../../types'
-import { Apple, Bus, Drama, Gamepad, Smartphone } from 'lucide-react'
+import { Apple, Bus, Drama, Smartphone } from 'lucide-react'
 
 export const EXPENSE_CATEGORIES: Category[] = [
   {

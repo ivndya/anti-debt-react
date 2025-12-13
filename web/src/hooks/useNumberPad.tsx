@@ -16,7 +16,7 @@ export const useNumberPad = () => {
       setAmount(num)
     } else {
       if (amount.includes('.')) {
-        const [integerPart, decimalPart] = amount.split('.')
+        const decimalPart = amount.split('.')[1] || ''
         // ограничение до 2 знаков после точки
         if (decimalPart.length < 2) {
           setAmount(amount + num)
