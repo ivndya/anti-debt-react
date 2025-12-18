@@ -16,7 +16,7 @@ export const useDebts = () => {
 
     const newDebt: Debt = {
       id: Date.now(),
-      amount: parseInt(amount, 10),
+      amount: parseFloat(amount),
       categoryId,
       lender,
       date: now.toISOString(),
