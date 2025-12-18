@@ -11,10 +11,12 @@ interface DebtsNumberPadProps {
     amount,
     categoryId,
     lender,
+    dueDate,
   }: {
     amount: string
     categoryId: string
     lender: string
+    dueDate: string
   }) => void
 }
 
@@ -22,6 +24,7 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [isDebtModalOpen, setIsDebtModalOpen] = useState(false)
   const [lenderName, setLenderName] = useState('')
+  const [dueDate, setDueDate] = useState('')
 
   const { amount, resetAmount, handleNumberPress, handleDeletePress } = useNumberPad()
 
@@ -32,16 +35,19 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
   }
 
   const handleSubmit = () => {
-    if (lenderName.trim()) {
+    if (lenderName.trim() && dueDate) {
       const { id } = DEBT_CATEGORIES[selectedCategory]
+
       addDebt({
         amount,
         categoryId: id,
         lender: lenderName.trim(),
+        dueDate,
       })
 
       resetAmount()
       setLenderName('')
+      setDueDate('')
       setIsDebtModalOpen(false)
     }
   }
@@ -79,11 +85,14 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
       <DebtModal
         open={isDebtModalOpen}
         lenderName={lenderName}
+        onchangeLenderName={setLenderName}
+        dueDate={dueDate}
+        onChangeDueDate={setDueDate}
         onCancel={() => {
           setIsDebtModalOpen(false)
           setLenderName('')
+          setDueDate('')
         }}
-        onchangeLenderName={setLenderName}
         onConfirm={handleSubmit}
       />
     </>

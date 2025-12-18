@@ -8,6 +8,7 @@ export interface Debt {
   lender: string
   date: string
   paid: boolean
+  dueDate: string
 }
 
 export interface DebtsListProps {
@@ -19,6 +20,8 @@ export interface DebtModalProps {
   open: boolean
   lenderName: string
   onchangeLenderName: (value: string) => void
+  dueDate: string
+  onChangeDueDate: (value: string) => void
   onCancel: () => void
   onConfirm: () => void
 }

@@ -2,6 +2,16 @@ import { Trash2 } from 'lucide-react'
 import { DEBT_CATEGORIES_MAP } from '../../../../shared/consts/categories/debts'
 import { DebtsListProps } from '../../../../shared/types'
 
+const formatDate = (date: string) => {
+  if (!date) return ''
+
+  const d = new Date(date)
+
+  if (isNaN(d.getTime())) return ''
+
+  return d.toLocaleDateString('ru-RU')
+}
+
 export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => {
   if (debts.length === 0) {
     return (
@@ -11,10 +21,15 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => 
     )
   }
 
+  const today = new Date()
+
   return (
     <div>
       {debts.map((debt) => {
         const category = DEBT_CATEGORIES_MAP[debt.categoryId]
+
+        const due = new Date(debt.dueDate)
+        const isOverdue = !debt.paid && due < today
 
         return (
           <div
@@ -29,12 +44,19 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => 
                 />
                 <span className="font-semibold text-lg text-white">{debt.amount} ₽</span>
               </div>
-              <div className="text-gray-400 text-sm mb-0.5">Должен: {debt.lender}</div>
+
+              <div className="text-gray-400 text-sm">Должен: {debt.lender}</div>
+
+              <div className={`text-xs ${isOverdue ? 'text-red-500' : 'text-gray-500'}`}>
+                Вернуть до: {formatDate(debt.dueDate)}
+              </div>
+
               <div className="text-gray-500 text-xs">Категория: {category.name}</div>
             </div>
+
             <button
               onClick={() => onDeleteDebt(debt.id)}
-              className="bg-black w-12 h-12 rounded-full flex items-center justify-center border-none cursor-pointer transition-colors duration-200 hover:bg-gray-900"
+              className="bg-black w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-gray-900"
             >
               <Trash2 size={20} color="white" />
             </button>
