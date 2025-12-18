@@ -7,6 +7,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'personal',
     lender: 'Аптека',
     date: '2025-03-11T14:20:00.000Z',
+    dueDate: '2026-03-18',
     paid: false,
   },
   {
@@ -15,6 +16,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'family',
     lender: 'Мама',
     date: '2025-02-22T10:00:00.000Z',
+    dueDate: '2025-03-01',
     paid: false,
   },
   {
@@ -23,6 +25,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'friends',
     lender: 'Кирилл',
     date: '2025-03-05T19:10:00.000Z',
+    dueDate: '2026-03-12',
     paid: false,
   },
   {
@@ -31,6 +34,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'work',
     lender: 'Коллега Илья',
     date: '2025-03-03T08:45:00.000Z',
+    dueDate: '2025-03-10',
     paid: true,
   },
   {
@@ -39,6 +43,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'personal',
     lender: 'Магазин электроники',
     date: '2025-02-02T15:50:00.000Z',
+    dueDate: '2026-02-16',
     paid: false,
   },
   {
@@ -47,6 +52,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'friends',
     lender: 'Серёга',
     date: '2025-01-29T17:30:00.000Z',
+    dueDate: '2025-02-05',
     paid: true,
   },
   {
@@ -55,6 +61,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'family',
     lender: 'Брат',
     date: '2025-03-12T11:00:00.000Z',
+    dueDate: '2025-03-26',
     paid: false,
   },
   {
@@ -63,6 +70,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'work',
     lender: 'HR отдела',
     date: '2025-02-16T12:10:00.000Z',
+    dueDate: '2026-02-23',
     paid: true,
   },
   {
@@ -71,6 +79,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'personal',
     lender: 'Такси',
     date: '2025-01-05T23:50:00.000Z',
+    dueDate: '2025-01-12',
     paid: false,
   },
   {
@@ -79,6 +88,7 @@ export const MOCK_DEBTS: Debt[] = [
     categoryId: 'friends',
     lender: 'Компания друзей (квиз)',
     date: '2025-03-20T19:30:00.000Z',
+    dueDate: '2026-03-27',
     paid: false,
   },
 ]

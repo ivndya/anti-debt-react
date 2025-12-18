@@ -5,18 +5,22 @@ interface AddDebtParams {
   amount: string
   categoryId: string
   lender: string
+  dueDate: string
 }
 
 export const useDebts = () => {
   const { debts, setDebts } = useFinance()
 
-  const addDebt = ({ amount, categoryId, lender }: AddDebtParams) => {
+  const addDebt = ({ amount, categoryId, lender, dueDate }: AddDebtParams) => {
+    const now = new Date()
+
     const newDebt: Debt = {
       id: Date.now(),
       amount: parseInt(amount, 10),
       categoryId,
       lender,
-      date: new Date().toLocaleString(),
+      date: now.toISOString(),
+      dueDate,
       paid: false,
     }
 
