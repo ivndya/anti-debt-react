@@ -39,16 +39,13 @@ export const TransactionNumberPad = () => {
   return (
     <>
       <div className="p-6 mb-4 relative">
-        <button
+        <div
           onClick={toggleTransactionType}
-          className={`px-4 py-2 rounded-lg absolute top-5 right-5
-            ${transactionType === 'expense' ? 'bg-red-600 text-white' : 'bg-green-600 text-white'}`}
+          className={`text-5xl font-bold text-center mb-6 flex items-center justify-center gap-2 
+            ${transactionType === 'expense' ? 'text-red-500' : 'text-green-400'}`}
         >
-          {transactionType === 'expense' ? 'Расход' : 'Доход'}
-        </button>
-        <div className="text-5xl font-bold text-center mb-6 text-white flex items-center justify-center gap-2">
           <span>{amount.includes('.') ? parseFloat(amount).toFixed(2) : amount}</span>
-          <RussianRuble size={40} color="white" />
+          <RussianRuble size={40} />
         </div>
 
         <CategoryTabs
