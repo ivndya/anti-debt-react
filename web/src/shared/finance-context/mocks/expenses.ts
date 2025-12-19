@@ -1,9 +1,10 @@
 import { Expense } from '../../types'
 
+// prettier-ignore
 export const MOCK_EXPENSES: Expense[] = [
   {
     id: 301,
-    amount: 1200.5,
+    amount: 1200.50,
     categoryId: 'food',
     description: 'Пятёрочка',
     date: '2025-03-11T18:30:00.000Z',
@@ -17,7 +18,7 @@ export const MOCK_EXPENSES: Expense[] = [
   },
   {
     id: 303,
-    amount: 499.9,
+    amount: 499.90,
     categoryId: 'subscriptions',
     description: 'Spotify',
     date: '2025-03-01T00:10:00.000Z',
@@ -59,7 +60,7 @@ export const MOCK_EXPENSES: Expense[] = [
   },
   {
     id: 309,
-    amount: 950.1,
+    amount: 950.10,
     categoryId: 'food',
     description: 'Столовая возле офиса',
     date: '2025-03-06T13:00:00.000Z',

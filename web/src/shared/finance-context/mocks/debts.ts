@@ -1,9 +1,10 @@
 import { Debt } from '../../types'
 
+// prettier-ignore
 export const MOCK_DEBTS: Debt[] = [
   {
     id: 101,
-    amount: 2500.5,
+    amount: 2500.50,
     categoryId: 'personal',
     lender: 'Аптека',
     date: '2025-03-11T14:20:00.000Z',
@@ -39,7 +40,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 105,
-    amount: 3200.3,
+    amount: 3200.30,
     categoryId: 'personal',
     lender: 'Магазин электроники',
     date: '2025-02-02T15:50:00.000Z',
@@ -66,7 +67,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 108,
-    amount: 2200.4,
+    amount: 2200.40,
     categoryId: 'work',
     lender: 'HR отдела',
     date: '2025-02-16T12:10:00.000Z',

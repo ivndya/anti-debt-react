@@ -1,5 +1,6 @@
 import { Income } from '../../types'
 
+// prettier-ignore
 export const MOCK_INCOMES: Income[] = [
   {
     id: 1,
@@ -12,7 +13,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 2,
-    amount: 150000.5,
+    amount: 150000.50,
     categoryId: 'salary',
     source: 'Основная работа',
     date: '2025-02-01T10:00:00.000Z',
@@ -48,7 +49,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 6,
-    amount: 5200.8,
+    amount: 5200.80,
     categoryId: 'investments',
     source: 'Купоны по облигациям',
     date: '2025-03-10T14:45:00.000Z',
@@ -66,7 +67,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 8,
-    amount: 5000.5,
+    amount: 5000.50,
     categoryId: 'gifts',
     source: 'Друзья',
     date: '2025-02-14T20:00:00.000Z',
@@ -75,7 +76,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 9,
-    amount: 8500.9,
+    amount: 8500.90,
     categoryId: 'freelance',
     source: 'Консультация по фронту',
     date: '2025-03-03T18:00:00.000Z',
