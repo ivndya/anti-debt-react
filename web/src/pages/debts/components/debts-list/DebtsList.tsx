@@ -42,7 +42,7 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt }) => 
                   className="w-3 h-3 rounded-full mr-2"
                   style={{ backgroundColor: category.color }}
                 />
-                <span className="font-semibold text-lg text-white">{debt.amount} ₽</span>
+                <span className="font-semibold text-lg text-white">{debt.amount.toFixed(2)} ₽</span>
               </div>
 
               <div className="text-gray-400 text-sm">Должен: {debt.lender}</div>
