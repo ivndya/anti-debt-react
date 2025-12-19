@@ -3,7 +3,7 @@ import { Income } from '../../types'
 export const MOCK_INCOMES: Income[] = [
   {
     id: 1,
-    amount: 145000.00,
+    amount: 145000.0,
     categoryId: 'salary',
     source: 'Основная работа',
     date: '2025-03-01T10:00:00.000Z',
@@ -12,7 +12,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 2,
-    amount: 150000.50,
+    amount: 150000.5,
     categoryId: 'salary',
     source: 'Основная работа',
     date: '2025-02-01T10:00:00.000Z',
@@ -30,7 +30,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 4,
-    amount: 18000.00,
+    amount: 18000.0,
     categoryId: 'freelance',
     source: 'Правки по старому проекту',
     date: '2025-03-05T21:10:00.000Z',
@@ -48,7 +48,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 6,
-    amount: 5200.80,
+    amount: 5200.8,
     categoryId: 'investments',
     source: 'Купоны по облигациям',
     date: '2025-03-10T14:45:00.000Z',
@@ -57,7 +57,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 7,
-    amount: 10000.00,
+    amount: 10000.0,
     categoryId: 'gifts',
     source: 'Родители',
     date: '2025-03-12T09:20:00.000Z',
@@ -66,7 +66,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 8,
-    amount: 5000.50,
+    amount: 5000.5,
     categoryId: 'gifts',
     source: 'Друзья',
     date: '2025-02-14T20:00:00.000Z',
@@ -75,7 +75,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 9,
-    amount: 8500.90,
+    amount: 8500.9,
     categoryId: 'freelance',
     source: 'Консультация по фронту',
     date: '2025-03-03T18:00:00.000Z',
@@ -84,7 +84,7 @@ export const MOCK_INCOMES: Income[] = [
   },
   {
     id: 10,
-    amount: 3900.40,
+    amount: 3900.4,
     categoryId: 'investments',
     source: 'Кешбэк и проценты',
     date: '2025-03-08T11:30:00.000Z',
