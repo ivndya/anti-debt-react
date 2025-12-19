@@ -1,9 +1,10 @@
 import { Debt } from '../../types'
 
+// prettier-ignore
 export const MOCK_DEBTS: Debt[] = [
   {
     id: 101,
-    amount: 2500,
+    amount: 2500.50,
     categoryId: 'personal',
     lender: 'Аптека',
     date: '2025-03-11T14:20:00.000Z',
@@ -12,7 +13,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 102,
-    amount: 8000,
+    amount: 8000.0,
     categoryId: 'family',
     lender: 'Мама',
     date: '2025-02-22T10:00:00.000Z',
@@ -21,7 +22,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 103,
-    amount: 1500,
+    amount: 1500.75,
     categoryId: 'friends',
     lender: 'Кирилл',
     date: '2025-03-05T19:10:00.000Z',
@@ -30,7 +31,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 104,
-    amount: 5000,
+    amount: 5000.0,
     categoryId: 'work',
     lender: 'Коллега Илья',
     date: '2025-03-03T08:45:00.000Z',
@@ -39,7 +40,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 105,
-    amount: 3200,
+    amount: 3200.30,
     categoryId: 'personal',
     lender: 'Магазин электроники',
     date: '2025-02-02T15:50:00.000Z',
@@ -48,7 +49,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 106,
-    amount: 1200,
+    amount: 1200.0,
     categoryId: 'friends',
     lender: 'Серёга',
     date: '2025-01-29T17:30:00.000Z',
@@ -57,7 +58,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 107,
-    amount: 10000,
+    amount: 10000.99,
     categoryId: 'family',
     lender: 'Брат',
     date: '2025-03-12T11:00:00.000Z',
@@ -66,7 +67,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 108,
-    amount: 2200,
+    amount: 2200.40,
     categoryId: 'work',
     lender: 'HR отдела',
     date: '2025-02-16T12:10:00.000Z',
@@ -75,7 +76,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 109,
-    amount: 750,
+    amount: 750.25,
     categoryId: 'personal',
     lender: 'Такси',
     date: '2025-01-05T23:50:00.000Z',
@@ -84,7 +85,7 @@ export const MOCK_DEBTS: Debt[] = [
   },
   {
     id: 110,
-    amount: 4200,
+    amount: 4200.8,
     categoryId: 'friends',
     lender: 'Компания друзей (квиз)',
     date: '2025-03-20T19:30:00.000Z',

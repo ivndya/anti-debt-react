@@ -23,7 +23,7 @@ export const DebtModal: React.FC<DebtModalProps> = ({
           placeholder="Введите имя"
           className="w-full border border-[#3D3D3D] rounded-lg p-3 mb-3 bg-[#1A1A1A] text-white text-base outline-none focus:border-gray-500"
         />
-
+        <label className="block text-sm text-gray-300 mb-1">Выберите дату</label>
         <input
           type="date"
           value={dueDate}

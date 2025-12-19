@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "My Website"
+rootProject.name = "anti-debt"
 include ':app'
