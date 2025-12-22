@@ -80,31 +80,21 @@ export const useDebts = () => {
   }
 
   const getMonthlyStats = () => {
-    const now = new Date()
-    const currentMonth = now.getMonth()
-    const currentYear = now.getFullYear()
-
-    // Долги, созданные в текущем месяце
-    const monthlyDebts = debts.filter((debt) => {
-      const debtDate = new Date(debt.date)
-      return debtDate.getMonth() === currentMonth && debtDate.getFullYear() === currentYear
-    })
-
     // Общее количество всех долгов
     const totalDebtsCount = debts.length
-    
+
     // Количество погашенных долгов
     const paidDebtsCount = debts.filter((d) => d.paid).length
-    
+
     // Сумма непогашенных долгов (с учетом remainingAmount)
     const unpaidAmount = normalizedDebts
       .filter((d) => !d.paid)
       .reduce((sum, d) => sum + (d.remainingAmount ?? d.amount), 0)
 
-    return { 
+    return {
       totalDebtsCount,
-      paidDebtsCount, 
-      unpaidAmount 
+      paidDebtsCount,
+      unpaidAmount,
     }
   }
 
