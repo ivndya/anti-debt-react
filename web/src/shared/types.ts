@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 export interface Debt {
   id: number
   amount: number
+  remainingAmount: number
   categoryId: string
   lender: string
   date: string
@@ -14,6 +15,7 @@ export interface Debt {
 export interface DebtsListProps {
   debts: Debt[]
   onDeleteDebt: (id: number) => void
+  onSelectDebt: (debt: Debt) => void
 }
 
 export interface DebtModalProps {
@@ -24,6 +26,15 @@ export interface DebtModalProps {
   onChangeDueDate: (value: string) => void
   onCancel: () => void
   onConfirm: () => void
+}
+
+export interface ChangeDebtModalProps {
+  open: boolean
+  debt: Debt | null
+  payAmount: string
+  onChangePayAmount: (value: string) => void
+  onCancel: () => void
+  onPay: () => void
 }
 
 export interface StatsData {
@@ -74,6 +85,14 @@ export interface Income {
   date: string
   comment?: string
   recurring?: boolean
+}
+
+export interface DebtPayment {
+  id: number
+  debtId: number
+  amount: number
+  lender: string
+  date: string
 }
 
 export interface Category {
