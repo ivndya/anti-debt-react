@@ -6,7 +6,7 @@ import { EXPENSE_CATEGORIES } from '../../../shared/consts/categories/expenses'
 import { useTransactions } from '../../../hooks/useMoney'
 import { TransactionType } from '../../../shared/types'
 import { INCOME_CATEGORIES } from '../../../shared/consts/categories/incomes'
-import { RussianRuble } from 'lucide-react'
+import { Check, RussianRuble } from 'lucide-react'
 
 export const TransactionNumberPad = () => {
   const [selectedCategory, setSelectedCategory] = useState(0)
@@ -17,7 +17,6 @@ export const TransactionNumberPad = () => {
   }
 
   const { amount, resetAmount, handleNumberPress, handleDeletePress } = useNumberPad()
-
   const { addIncome, addExpense } = useTransactions()
 
   const handleSubmit = () => {
@@ -28,47 +27,65 @@ export const TransactionNumberPad = () => {
         categoryId: category.id,
         description: category.name,
       })
-    } else if (transactionType === 'income') {
+    } else {
       const category = INCOME_CATEGORIES[selectedCategory]
       addIncome({ amount, categoryId: category.id, source: category.name })
     }
-
     resetAmount()
   }
 
   return (
-    <>
-      <div className="p-6 mb-4 relative">
+    <div className="flex flex-col h-full p-4">
+      <div className="flex justify-center mb-4">
+        <div
+          className={`px-4 py-2 rounded-lg cursor-pointer transition-colors duration-200
+            bg-zinc-800`}
+        >
+          <span className="text-sm font-medium text-white">
+            {transactionType === 'expense' ? 'Расход' : 'Доход'}
+          </span>
+        </div>
+      </div>
+      {/* Верхний блок: сумма */}
+      <div className="flex justify-center items-center flex-1">
         <div
           onClick={toggleTransactionType}
-          className={`text-5xl font-normal text-center mb-6 flex items-center justify-center gap-2 
-            ${transactionType === 'expense' ? 'text-red-500' : 'text-green-400'}`}
+          className={`text-6xl font-extrabold flex items-center gap-2
+            ${transactionType === 'expense' ? 'text-red-500' : 'text-green-500'}`}
         >
           <span>{amount.includes('.') ? parseFloat(amount).toFixed(2) : amount}</span>
-          <RussianRuble size={40} />
+          <RussianRuble size={48} strokeWidth={3} />
         </div>
+      </div>
 
-        <CategoryTabs
-          categories={transactionType === 'expense' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-
-        <NumberPad onNumberPress={handleNumberPress} onDelete={handleDeletePress} />
-
+      {/* Нижний блок: категории, NumberPad и кнопка */}
+      <div className="flex-1 flex flex-col justify-end">
+        <div className="mb-6">
+          <CategoryTabs
+            categories={transactionType === 'expense' ? EXPENSE_CATEGORIES : INCOME_CATEGORIES}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </div>
+        <div className="mb-4">
+          <NumberPad onNumberPress={handleNumberPress} onDelete={handleDeletePress} />
+        </div>
         <button
           onClick={handleSubmit}
           disabled={amount === '0' || amount === '0.'}
-          className={`w-full p-4 rounded-lg mt-4 border-none cursor-pointer transition-colors duration-200 
-    ${
-      amount === '0' || amount === '0.'
-        ? 'bg-[#3D3D3D] cursor-not-allowed'
-        : 'bg-gray-600 hover:bg-green-500'
-    }`}
+          className={`w-full p-4 rounded-lg border-none cursor-pointer transition-colors duration-200
+            ${
+              amount === '0' || amount === '0.'
+                ? 'bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 cursor-not-allowed'
+                : 'bg-green-700'
+            }`}
         >
-          <span className="text-center text-lg font-semibold text-white">Сохранить</span>
+          <div className="flex items-center justify-center gap-2">
+            <Check className="w-5 h-5" />
+            <span className="text-lg font-semibold text-white">Сохранить</span>
+          </div>
         </button>
       </div>
-    </>
+    </div>
   )
 }

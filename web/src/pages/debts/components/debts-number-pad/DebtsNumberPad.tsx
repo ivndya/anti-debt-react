@@ -4,7 +4,7 @@ import { DEBT_CATEGORIES } from '../../../../shared/consts/categories/debts'
 import { CategoryTabs } from '../../../../widgets/category-tabs/CategoryTabs'
 import { NumberPad } from '../../../../widgets/number-pad/NumberPad'
 import { DebtModal } from '../debt-modal/DebtModal'
-import { RussianRuble } from 'lucide-react'
+import { Check, RussianRuble } from 'lucide-react'
 
 interface DebtsNumberPadProps {
   addDebt: ({
@@ -37,14 +37,12 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
   const handleSubmit = () => {
     if (lenderName.trim() && dueDate) {
       const { id } = DEBT_CATEGORIES[selectedCategory]
-
       addDebt({
         amount,
         categoryId: id,
         lender: lenderName.trim(),
         dueDate,
       })
-
       resetAmount()
       setLenderName('')
       setDueDate('')
@@ -54,32 +52,50 @@ export const DebtsNumberPad = ({ addDebt }: DebtsNumberPadProps) => {
 
   return (
     <>
-      <div className="p-6 mb-4">
-        <div className="text-5xl font-bold text-center mb-6 text-white flex items-center justify-center gap-2">
-          <span>{amount}</span>
-          <RussianRuble size={40} color="white" />
+      <div className="flex flex-col h-full p-4">
+        {/* Заголовок */}
+        <div className="flex justify-center mb-4">
+          <div className="bg-zinc-800 px-4 py-2 rounded-lg">
+            <span className="text-sm font-medium text-white">Добавить долг</span>
+          </div>
         </div>
 
-        <CategoryTabs
-          categories={DEBT_CATEGORIES}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
+        {/* Верхний блок: сумма */}
+        <div className="flex justify-center items-center flex-1">
+          <div className="text-6xl font-extrabold flex items-center gap-2 text-white">
+            <span>{amount.includes('.') ? parseFloat(amount).toFixed(2) : amount}</span>
+            <RussianRuble size={48} strokeWidth={3} />
+          </div>
+        </div>
 
-        <NumberPad onNumberPress={handleNumberPress} onDelete={handleDeletePress} />
-
-        <button
-          onClick={handleOnSave}
-          disabled={amount === '0' || amount === '0.'}
-          className={`w-full p-4 rounded-lg mt-4 border-none cursor-pointer transition-colors duration-200 
-    ${
-      amount === '0' || amount === '0.'
-        ? 'bg-[#3D3D3D] cursor-not-allowed'
-        : 'bg-gray-600 hover:bg-green-500'
-    }`}
-        >
-          <span className="text-center text-lg font-semibold text-white">Сохранить</span>
-        </button>
+        {/* Нижний блок: категории, NumberPad и кнопка */}
+        <div className="flex-1 flex flex-col justify-end">
+          <div className="mb-6">
+            <CategoryTabs
+              categories={DEBT_CATEGORIES}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
+          </div>
+          <div className="mb-4">
+            <NumberPad onNumberPress={handleNumberPress} onDelete={handleDeletePress} />
+          </div>
+          <button
+            onClick={handleOnSave}
+            disabled={amount === '0' || amount === '0.'}
+            className={`w-full p-4 rounded-lg border-none cursor-pointer transition-colors duration-200 
+              ${
+                amount === '0' || amount === '0.'
+                  ? 'bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 cursor-not-allowed'
+                  : 'bg-green-600'
+              }`}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Check className="w-5 h-5" />
+              <span className="text-lg font-semibold text-white">Сохранить</span>
+            </div>
+          </button>
+        </div>
       </div>
 
       <DebtModal

@@ -21,7 +21,7 @@ const getProgressColor = (progress: number) => {
 export const DebtsList: React.FC<DebtsListProps> = ({ debts, onSelectDebt }) => {
   if (debts.length === 0) {
     return (
-      <div className="bg-[#2D2D2D] rounded-2xl p-8 text-center">
+      <div className="bg-[#3D3D3D] rounded-2xl p-8 text-center">
         <div className="text-gray-500">Долгов пока нет.</div>
       </div>
     )
@@ -58,7 +58,7 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onSelectDebt }) => 
           <div
             key={debt.id}
             onClick={() => onSelectDebt(debt)}
-            className="bg-[#2D2D2D] rounded-xl p-4 mb-3 flex items-center justify-between cursor-pointer transition-colors duration-200 hover:bg-[#343434]"
+            className="bg-[#3D3D3D] rounded-xl p-4 m-4 mb-3 flex items-center justify-between cursor-pointer transition-colors duration-200 hover:bg-[#343434]"
           >
             <div className="flex-1">
               <div className="flex items-center mb-1">

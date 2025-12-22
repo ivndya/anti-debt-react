@@ -5,7 +5,7 @@ export const INCOME_CATEGORIES: Category[] = [
   {
     id: 'salary',
     name: 'Зарплата',
-    color: '#4CAF50',
+    color: '#16A34A',
     icon: HandCoins,
   },
   {
