@@ -1,4 +1,4 @@
-import { TransactionNumberPad } from './components/transcation-number-pad/TransactionNumberPad'
+import { TransactionNumberPad } from './components/TransactionNumberPad'
 
 export const Home = () => {
   return (

@@ -11,6 +11,7 @@ interface DebtsFiltersProps {
 
 const FILTER_OPTIONS: { label: string; value: DebtsFilterMode }[] = [
   { label: 'Только невыплаченные', value: 'unpaid' },
+  { label: 'Выплаченные долги', value: 'paid' },
   { label: 'Все долги', value: 'all' },
 ]
 
