@@ -33,8 +33,11 @@ export const useDebtsView = ({ debts }: UseDebtsViewParams) => {
       }
 
       if (sortField === 'amount') {
-        if (a.amount === b.amount) return 0
-        const cmp = a.amount < b.amount ? -1 : 1
+        const aValue = a.remainingAmount ?? a.amount
+        const bValue = b.remainingAmount ?? b.amount
+
+        if (aValue === bValue) return 0
+        const cmp = aValue < bValue ? -1 : 1
         return sortDirection === 'asc' ? cmp : -cmp
       }
 

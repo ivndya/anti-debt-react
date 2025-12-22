@@ -1,14 +1,16 @@
+import { useState } from 'react'
 import { DebtsList } from './components/debts-list/DebtsList'
 import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
 import { useDebts } from '../../hooks/useDebts'
 import { FINANCIAL_TIPS } from '../../shared/finance-context/mocks/financialTips'
-import { useState } from 'react'
 import { useDebtsView } from './components/sorting/hooks/useDebtsView'
 import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal'
 import { useToggle } from '../../shared/hooks/useToggle'
+import { ChangeDebtModal } from './components/change-debt-modal/ChangeDebtModal'
+import { Debt } from '../../shared/types'
 
 export const Debts = () => {
-  const { debts, addDebt, deleteDebt } = useDebts()
+  const { debts, addDebt, deleteDebt, payDebt } = useDebts()
 
   const {
     sortedDebts,
@@ -27,6 +29,29 @@ export const Debts = () => {
   })
 
   const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
+
+  const [selectedDebt, setSelectedDebt] = useState<Debt | null>(null)
+  const [payAmount, setPayAmount] = useState('')
+
+  const closeModal = () => {
+    setSelectedDebt(null)
+    setPayAmount('')
+  }
+
+  const handlePay = () => {
+    if (!selectedDebt) return
+
+    const value = parseFloat(payAmount)
+    if (isNaN(value) || value <= 0) return
+
+    const remaining = selectedDebt.remainingAmount ?? selectedDebt.amount
+    const payment = Math.min(value, remaining)
+
+    if (payment > 0) {
+      payDebt(selectedDebt.id, payment)
+      closeModal()
+    }
+  }
 
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
@@ -47,7 +72,14 @@ export const Debts = () => {
         </button>
       </div>
 
-      <DebtsList debts={sortedDebts} onDeleteDebt={deleteDebt} />
+      <DebtsList
+        debts={sortedDebts}
+        onDeleteDebt={deleteDebt}
+        onSelectDebt={(debt) => {
+          setSelectedDebt(debt)
+          setPayAmount((debt.remainingAmount ?? debt.amount).toString())
+        }}
+      />
 
       <DebtsFiltersModal
         isOpen={isFiltersOpen}
@@ -58,6 +90,15 @@ export const Debts = () => {
         onFilterModeChange={setFilterMode}
         onSortFieldChange={setSortField}
         onToggleSortDirection={toggleSortDirection}
+      />
+
+      <ChangeDebtModal
+        open={Boolean(selectedDebt)}
+        debt={selectedDebt}
+        payAmount={payAmount}
+        onChangePayAmount={setPayAmount}
+        onCancel={closeModal}
+        onPay={handlePay}
       />
     </div>
   )

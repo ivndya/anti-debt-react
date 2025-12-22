@@ -1,5 +1,6 @@
 import { useFinance } from '../shared/finance-context/FinanceContext'
 import { Debt } from '../shared/types'
+import { useMemo } from 'react'
 
 interface AddDebtParams {
   amount: string
@@ -11,12 +12,18 @@ interface AddDebtParams {
 export const useDebts = () => {
   const { debts, setDebts } = useFinance()
 
+  const normalizedDebts = useMemo(
+    () => debts.map((debt) => ({ ...debt, remainingAmount: debt.remainingAmount ?? debt.amount })),
+    [debts],
+  )
+
   const addDebt = ({ amount, categoryId, lender, dueDate }: AddDebtParams) => {
     const now = new Date()
 
     const newDebt: Debt = {
       id: Date.now(),
       amount: parseFloat(amount),
+      remainingAmount: parseFloat(amount),
       categoryId,
       lender,
       date: now.toISOString(),
@@ -28,9 +35,29 @@ export const useDebts = () => {
   }
 
   const deleteDebt = (id: number) => {
-    const updatedDebts = debts.filter((d) => d.id !== id)
+    const updatedDebts = normalizedDebts.filter((d) => d.id !== id)
 
     setDebts(updatedDebts)
+  }
+
+  const payDebt = (id: number, value: number) => {
+    if (!Number.isFinite(value) || value <= 0) return
+
+    setDebts((prev) =>
+      prev.map((debt) => {
+        if (debt.id !== id) return debt
+
+        const currentRemaining = debt.remainingAmount ?? debt.amount
+        const payment = Math.min(value, currentRemaining)
+        const updatedRemaining = parseFloat((currentRemaining - payment).toFixed(2))
+
+        return {
+          ...debt,
+          remainingAmount: updatedRemaining,
+          paid: updatedRemaining <= 0,
+        }
+      }),
+    )
   }
 
   const getMonthlyStats = () => {
@@ -38,7 +65,7 @@ export const useDebts = () => {
     const currentMonth = now.getMonth()
     const currentYear = now.getFullYear()
 
-    const monthlyDebts = debts.filter((debt) => {
+    const monthlyDebts = normalizedDebts.filter((debt) => {
       const debtDate = new Date(debt.date)
       return debtDate.getMonth() === currentMonth && debtDate.getFullYear() === currentYear
     })
@@ -51,7 +78,9 @@ export const useDebts = () => {
   }
 
   const calculateFinancialHealth = () => {
-    const totalDebt = debts.filter((d) => !d.paid).reduce((sum, d) => sum + d.amount, 0)
+    const totalDebt = normalizedDebts
+      .filter((d) => !d.paid)
+      .reduce((sum, d) => sum + (d.remainingAmount ?? d.amount), 0)
 
     if (totalDebt === 0) return 0
     if (totalDebt < 5000) return 1
@@ -60,9 +89,10 @@ export const useDebts = () => {
   }
 
   return {
-    debts,
+    debts: normalizedDebts,
     addDebt,
     deleteDebt,
+    payDebt,
     getMonthlyStats,
     calculateFinancialHealth,
   }
