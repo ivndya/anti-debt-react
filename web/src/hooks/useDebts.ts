@@ -1,5 +1,5 @@
 import { useFinance } from '../shared/finance-context/FinanceContext'
-import { Debt } from '../shared/types'
+import { Debt, DebtPayment } from '../shared/types'
 import { useMemo } from 'react'
 
 interface AddDebtParams {
@@ -10,7 +10,7 @@ interface AddDebtParams {
 }
 
 export const useDebts = () => {
-  const { debts, setDebts } = useFinance()
+  const { debts, setDebts, setDebtPayments } = useFinance()
 
   const normalizedDebts = useMemo(
     () =>
@@ -48,6 +48,9 @@ export const useDebts = () => {
   const payDebt = (id: number, value: number) => {
     if (!Number.isFinite(value) || value <= 0) return
 
+    const debtToUpdate = debts.find((d) => d.id === id)
+    if (!debtToUpdate) return
+
     setDebts((prev) =>
       prev.map((debt) => {
         if (debt.id !== id) return debt
@@ -63,6 +66,17 @@ export const useDebts = () => {
         }
       }),
     )
+
+    // Add payment record
+    const newPayment: DebtPayment = {
+      id: Date.now(),
+      debtId: id,
+      amount: Math.min(value, debtToUpdate.remainingAmount ?? debtToUpdate.amount),
+      lender: debtToUpdate.lender,
+      date: new Date().toISOString(),
+    }
+
+    setDebtPayments((prev) => [...prev, newPayment])
   }
 
   const getMonthlyStats = () => {

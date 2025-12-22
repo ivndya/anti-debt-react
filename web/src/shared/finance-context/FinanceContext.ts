@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { Debt, Expense, Income } from '../types'
+import { Debt, Expense, Income, DebtPayment } from '../types'
 
 export interface FinanceContextValue {
   incomes: Income[]
@@ -8,6 +8,8 @@ export interface FinanceContextValue {
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>
   debts: Debt[]
   setDebts: React.Dispatch<React.SetStateAction<Debt[]>>
+  debtPayments: DebtPayment[]
+  setDebtPayments: React.Dispatch<React.SetStateAction<DebtPayment[]>>
   balance: number
 }
 

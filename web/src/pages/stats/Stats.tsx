@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
-import { StatsProps, Debt, Income, Expense } from '../../shared/types'
+import { StatsProps, Debt, Income, Expense, DebtPayment } from '../../shared/types'
 
 // Типы для chartData
 interface MonthDataFinance {
@@ -44,13 +44,14 @@ type TransactionItem =
   | (Income & { type: 'income' })
   | (Expense & { type: 'expense' })
   | (Debt & { type: 'debt' })
+  | (DebtPayment & { type: 'debtPayment' })
 
 export const Stats: React.FC<StatsProps> = ({ stats }) => {
   const [chartMode, setChartMode] = useState<'finance' | 'debts'>('finance')
   const [showIncome, setShowIncome] = useState(true)
   const [showExpense, setShowExpense] = useState(true)
 
-  const { incomes, expenses, debts } = useFinance()
+  const { incomes, expenses, debts, debtPayments } = useFinance()
 
   // ----------------- Данные для графика -----------------
   const chartData = useMemo(() => {
@@ -125,10 +126,11 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
       ...incomes.map((income) => ({ ...income, type: 'income' as const })),
       ...expenses.map((expense) => ({ ...expense, type: 'expense' as const })),
       ...debts.map((debt) => ({ ...debt, type: 'debt' as const })),
+      ...debtPayments.map((payment) => ({ ...payment, type: 'debtPayment' as const })),
     ]
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 10)
-  }, [incomes, expenses, debts])
+  }, [incomes, expenses, debts, debtPayments])
 
   // ----------------- Отображение -----------------
   return (
@@ -234,12 +236,14 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
                       ? t.source
                       : t.type === 'expense'
                         ? (t.description ?? '')
-                        : t.lender}
+                        : t.type === 'debtPayment'
+                          ? `Выплата: ${t.lender}`
+                          : t.lender}
                   </div>
                   <div className="text-gray-500 text-xs">{dateStr}</div>
                 </div>
                 <div
-                  className={`font-bold ${t.type === 'income' ? 'text-green-400' : t.type === 'expense' ? 'text-red-400' : 'text-blue-400'}`}
+                  className={`font-bold ${t.type === 'income' ? 'text-green-400' : t.type === 'expense' ? 'text-red-400' : t.type === 'debtPayment' ? 'text-purple-400' : 'text-blue-400'}`}
                 >
                   {t.type === 'income' ? '+' : '-'}
                   {t.amount.toLocaleString()} ₽

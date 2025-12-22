@@ -87,6 +87,14 @@ export interface Income {
   recurring?: boolean
 }
 
+export interface DebtPayment {
+  id: number
+  debtId: number
+  amount: number
+  lender: string
+  date: string
+}
+
 export interface Category {
   id: string
   name: string

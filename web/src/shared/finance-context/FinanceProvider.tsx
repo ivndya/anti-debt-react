@@ -4,12 +4,13 @@ import { MOCK_DEBTS } from './mocks/debts'
 import { MOCK_INCOMES } from './mocks/income'
 import { MOCK_EXPENSES } from './mocks/expenses'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { Debt, Expense, FinanceProviderProps, Income } from '../types'
+import { Debt, Expense, FinanceProviderProps, Income, DebtPayment } from '../types'
 
 export const FinanceProvider: React.FC<FinanceProviderProps> = ({ children }) => {
   const [incomes, setIncomesRaw] = useLocalStorage('incomes', MOCK_INCOMES)
   const [expenses, setExpensesRaw] = useLocalStorage('expenses', MOCK_EXPENSES)
   const [debts, setDebtsRaw] = useLocalStorage('debts', MOCK_DEBTS)
+  const [debtPayments, setDebtPaymentsRaw] = useLocalStorage('debtPayments', [] as DebtPayment[])
 
   const balance = useMemo(() => {
     const incomesSum = incomes.reduce((sum, income) => sum + Number(income.amount || 0), 0)
@@ -34,6 +35,11 @@ export const FinanceProvider: React.FC<FinanceProviderProps> = ({ children }) =>
   const setDebts: React.Dispatch<React.SetStateAction<Debt[]>> = (value) =>
     typeof value === 'function' ? setDebtsRaw(value(debts)) : setDebtsRaw(value)
 
+  const setDebtPayments: React.Dispatch<React.SetStateAction<DebtPayment[]>> = (value) =>
+    typeof value === 'function'
+      ? setDebtPaymentsRaw(value(debtPayments))
+      : setDebtPaymentsRaw(value)
+
   const value = {
     incomes,
     setIncomes,
@@ -41,6 +47,8 @@ export const FinanceProvider: React.FC<FinanceProviderProps> = ({ children }) =>
     setExpenses,
     debts,
     setDebts,
+    debtPayments,
+    setDebtPayments,
     balance,
   }
 
