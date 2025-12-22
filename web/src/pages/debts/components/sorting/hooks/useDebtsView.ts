@@ -21,6 +21,10 @@ export const useDebtsView = ({ debts }: UseDebtsViewParams) => {
       result = result.filter((d) => !d.paid)
     }
 
+    if (filterMode === 'paid') {
+      result = result.filter((d) => d.paid)
+    }
+
     // 2. сортировка
     result.sort((a, b) => {
       if (sortField === 'date') {

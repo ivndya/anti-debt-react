@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useNumberPad } from '../../../../hooks/useNumberPad'
-import { CategoryTabs } from '../../../../widgets/category-tabs/CategoryTabs'
-import { NumberPad } from '../../../../widgets/number-pad/NumberPad'
-import { EXPENSE_CATEGORIES } from '../../../../shared/consts/categories/expenses'
-import { useTransactions } from '../../../../hooks/useMoney'
-import { TransactionType } from '../../../../shared/types'
-import { INCOME_CATEGORIES } from '../../../../shared/consts/categories/incomes'
+import { useNumberPad } from '../../../hooks/useNumberPad'
+import { CategoryTabs } from '../../../widgets/category-tabs/CategoryTabs'
+import { NumberPad } from '../../../widgets/number-pad/NumberPad'
+import { EXPENSE_CATEGORIES } from '../../../shared/consts/categories/expenses'
+import { useTransactions } from '../../../hooks/useMoney'
+import { TransactionType } from '../../../shared/types'
+import { INCOME_CATEGORIES } from '../../../shared/consts/categories/incomes'
 import { RussianRuble } from 'lucide-react'
 
 export const TransactionNumberPad = () => {
