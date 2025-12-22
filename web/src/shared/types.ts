@@ -38,9 +38,9 @@ export interface ChangeDebtModalProps {
 }
 
 export interface StatsData {
-  newDebts: number
-  paidDebts: number
-  totalAmount: number
+  totalDebtsCount: number
+  paidDebtsCount: number
+  unpaidAmount: number
 }
 
 export interface StatsProps {

@@ -41,7 +41,7 @@ export const TransactionNumberPad = () => {
       <div className="p-6 mb-4 relative">
         <div
           onClick={toggleTransactionType}
-          className={`text-5xl font-bold text-center mb-6 flex items-center justify-center gap-2 
+          className={`text-5xl font-normal text-center mb-6 flex items-center justify-center gap-2 
             ${transactionType === 'expense' ? 'text-red-500' : 'text-green-400'}`}
         >
           <span>{amount.includes('.') ? parseFloat(amount).toFixed(2) : amount}</span>

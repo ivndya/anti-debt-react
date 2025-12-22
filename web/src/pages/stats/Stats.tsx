@@ -50,8 +50,9 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
   const [chartMode, setChartMode] = useState<'finance' | 'debts'>('finance')
   const [showIncome, setShowIncome] = useState(true)
   const [showExpense, setShowExpense] = useState(true)
+  const [timeMode, setTimeMode] = useState<'month' | 'day'>('month')
 
-  const { incomes, expenses, debts, debtPayments } = useFinance()
+  const { incomes, expenses, debts, debtPayments, balance } = useFinance()
 
   // ----------------- Данные для графика -----------------
   const chartData = useMemo(() => {
@@ -70,6 +71,59 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
       'Дек',
     ]
 
+    if (timeMode === 'day') {
+      // Группировка по дням
+      if (chartMode === 'finance') {
+        const daysMap: Record<string, MonthMapFinance> = {}
+
+        incomes.forEach((income) => {
+          const date = new Date(income.date)
+          const dayKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+          const dayName = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
+          if (!daysMap[dayKey]) daysMap[dayKey] = { income: 0, expense: 0, date, name: dayName }
+          daysMap[dayKey].income += Number(income.amount)
+        })
+
+        expenses.forEach((expense) => {
+          const date = new Date(expense.date)
+          const dayKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+          const dayName = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
+          if (!daysMap[dayKey]) daysMap[dayKey] = { income: 0, expense: 0, date, name: dayName }
+          daysMap[dayKey].expense += Number(expense.amount)
+        })
+
+        return Object.values(daysMap)
+          .map((data) => ({
+            name: data.name,
+            date: data.date,
+            Доход: showIncome ? data.income : 0,
+            Расход: showExpense ? data.expense : 0,
+          }))
+          .sort((a, b) => a.date.getTime() - b.date.getTime())
+          .slice(-14) as MonthDataFinance[]
+      } else {
+        const daysMap: Record<string, MonthMapDebts> = {}
+
+        debts.forEach((debt) => {
+          const date = new Date(debt.date)
+          const dayKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+          const dayName = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`
+          if (!daysMap[dayKey]) daysMap[dayKey] = { debts: 0, date, name: dayName }
+          daysMap[dayKey].debts += Number(debt.amount)
+        })
+
+        return Object.values(daysMap)
+          .map((data) => ({
+            name: data.name,
+            date: data.date,
+            Долги: data.debts,
+          }))
+          .sort((a, b) => a.date.getTime() - b.date.getTime())
+          .slice(-14) as MonthDataDebts[]
+      }
+    }
+
+    // Группировка по месяцам (оригинальная логика)
     if (chartMode === 'finance') {
       const monthsMap: Record<string, MonthMapFinance> = {}
 
@@ -118,7 +172,7 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
         .sort((a, b) => a.date.getTime() - b.date.getTime())
         .slice(-6) as MonthDataDebts[]
     }
-  }, [incomes, expenses, debts, showIncome, showExpense, chartMode])
+  }, [incomes, expenses, debts, showIncome, showExpense, chartMode, timeMode])
 
   // ----------------- Объединение транзакций -----------------
   const transactions: TransactionItem[] = useMemo(() => {
@@ -137,11 +191,35 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
     <div className="flex-1 overflow-y-auto p-4 w-full box-border [&_*]:!outline-none">
       {/* Финансовая статистика + график */}
       <div className="bg-[#2D2D2D] rounded-2xl p-4 mb-4">
-        <div className="text-lg font-semibold mb-4 text-white">Финансовая статистика</div>
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-lg font-semibold text-white">Финансовая статистика</div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setTimeMode('month')}
+              className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                timeMode === 'month'
+                  ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/50'
+                  : 'bg-purple-500/30 text-white/70'
+              }`}
+            >
+              Месяц
+            </button>
+            <button
+              onClick={() => setTimeMode('day')}
+              className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                timeMode === 'day'
+                  ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/50'
+                  : 'bg-purple-500/30 text-white/70'
+              }`}
+            >
+              День
+            </button>
+          </div>
+        </div>
 
         <div className="bg-[#3D3D3D] rounded-xl mb-4 p-4 [&_.recharts-surface]:outline-none [&_.recharts-wrapper]:outline-none">
           <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={chartData}>
+            <BarChart data={chartData} margin={{ left: -20, right: 10, top: 5, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#555" />
               <XAxis dataKey="name" tick={{ fill: '#999', fontSize: 12 }} stroke="#555" />
               <YAxis
@@ -151,12 +229,21 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#2D2D2D',
-                  border: '1px solid #555',
+                  backgroundColor: '#1a1a1a',
+                  border: '1px solid #333',
                   borderRadius: '8px',
                 }}
                 labelStyle={{ color: '#fff' }}
                 itemStyle={{ color: '#fff' }}
+                cursor={{ fill: '#1a1a1a', opacity: 0.3 }}
+                formatter={(value, name) => {
+                  const num = Number(value) || 0
+                  const formatted = num.toLocaleString('ru-RU', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })
+                  return [`${formatted} ₽`, name]
+                }}
               />
               <Legend wrapperStyle={{ color: '#fff' }} iconType="circle" />
               {chartMode === 'finance' ? (
@@ -174,16 +261,25 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
         {/* Статистика долгов */}
         <div className="mt-4 w-full flex justify-around mb-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">{stats.newDebts}</div>
-            <div className="text-xs text-gray-500">Новые (в тек. мес.)</div>
+            <div className="text-2xl font-bold text-white">{stats.totalDebtsCount}</div>
+            <div className="text-xs text-gray-500">Всего долгов</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">{stats.paidDebts}</div>
+            <div className="text-2xl font-bold text-white">{stats.paidDebtsCount}</div>
             <div className="text-xs text-gray-500">Погашено</div>
           </div>
+        </div>
+        <div className="flex justify-around mb-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">{stats.totalAmount}</div>
-            <div className="text-xs text-gray-500">Всего ₽</div>
+            <div className="text-2xl font-bold text-white">{balance.toLocaleString()} ₽</div>
+            <div className="text-xs text-gray-500">Общий баланс</div>
+          </div>
+
+          <div className="text-center">
+            <div className="text-2xl font-bold text-white">
+              {stats.unpaidAmount.toLocaleString()} ₽
+            </div>
+            <div className="text-xs text-gray-500">Сумма непогашенных</div>
           </div>
         </div>
 
