@@ -13,7 +13,12 @@ export const useDebts = () => {
   const { debts, setDebts } = useFinance()
 
   const normalizedDebts = useMemo(
-    () => debts.map((debt) => ({ ...debt, remainingAmount: debt.remainingAmount ?? debt.amount })),
+    () =>
+      debts.map((debt) => ({
+        ...debt,
+        paid: debt.remainingAmount === 0,
+        remainingAmount: debt.remainingAmount ?? debt.amount,
+      })),
     [debts],
   )
 
