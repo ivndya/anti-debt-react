@@ -8,6 +8,7 @@ export interface FinanceContextValue {
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>
   debts: Debt[]
   setDebts: React.Dispatch<React.SetStateAction<Debt[]>>
+  balance: number
 }
 
 export const FinanceContext = createContext<FinanceContextValue | null>(null)
