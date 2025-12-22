@@ -10,7 +10,7 @@ export const useDebtsView = ({ debts }: UseDebtsViewParams) => {
   // по умолчанию: только невыплаченные
   const [filterMode, setFilterMode] = useState<DebtsFilterMode>('unpaid')
   // по умолчанию: по дате, новые → старые
-  const [sortField, setSortField] = useState<DebtsSortField>('date')
+  const [sortField, setSortField] = useState<DebtsSortField>('dueDate')
   const [sortDirection, setSortDirection] = useState<DebtsSortDirection>('desc')
 
   const sortedDebts = useMemo(() => {
@@ -42,6 +42,15 @@ export const useDebtsView = ({ debts }: UseDebtsViewParams) => {
 
         if (aValue === bValue) return 0
         const cmp = aValue < bValue ? -1 : 1
+        return sortDirection === 'asc' ? cmp : -cmp
+      }
+
+      if (sortField === 'dueDate') {
+        const aTime = new Date(a.dueDate).getTime()
+        const bTime = new Date(b.dueDate).getTime()
+
+        if (aTime === bTime) return 0
+        const cmp = aTime < bTime ? 1 : -1
         return sortDirection === 'asc' ? cmp : -cmp
       }
 

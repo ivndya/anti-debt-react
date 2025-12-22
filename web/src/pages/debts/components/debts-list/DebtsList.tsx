@@ -1,4 +1,3 @@
-import { Trash2 } from 'lucide-react'
 import { DEBT_CATEGORIES_MAP } from '../../../../shared/consts/categories/debts'
 import { DebtsListProps } from '../../../../shared/types'
 
@@ -19,7 +18,7 @@ const getProgressColor = (progress: number) => {
   return '#ef4444'
 }
 
-export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt, onSelectDebt }) => {
+export const DebtsList: React.FC<DebtsListProps> = ({ debts, onSelectDebt }) => {
   if (debts.length === 0) {
     return (
       <div className="bg-[#2D2D2D] rounded-2xl p-8 text-center">
@@ -43,6 +42,18 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt, onSel
         const due = new Date(debt.dueDate)
         const isOverdue = !debt.paid && due < today
 
+        // Проверяем, осталось ли меньше недели до срока выплаты
+        const oneWeekFromNow = new Date(today)
+        oneWeekFromNow.setDate(today.getDate() + 7)
+        const isDueSoon = !debt.paid && !isOverdue && due <= oneWeekFromNow
+
+        // Определяем цвет даты
+        const dueDateColor = isOverdue
+          ? 'text-red-500'
+          : isDueSoon
+            ? 'text-yellow-500'
+            : 'text-gray-500'
+
         return (
           <div
             key={debt.id}
@@ -62,7 +73,7 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt, onSel
 
               <div className="text-gray-400 text-xs mb-1">Всего: {debt.amount.toFixed(2)} ₽</div>
 
-              <div className={`text-xs ${isOverdue ? 'text-red-500' : 'text-gray-500'}`}>
+              <div className={`text-xs ${dueDateColor}`}>
                 Вернуть до: {formatDate(debt.dueDate)}
               </div>
 
@@ -81,16 +92,6 @@ export const DebtsList: React.FC<DebtsListProps> = ({ debts, onDeleteDebt, onSel
                 </div>
               </div>
             </div>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                onDeleteDebt(debt.id)
-              }}
-              className="bg-black w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-200 hover:bg-gray-900"
-            >
-              <Trash2 size={20} color="white" />
-            </button>
           </div>
         )
       })}
