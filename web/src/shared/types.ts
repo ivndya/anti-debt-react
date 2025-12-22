@@ -14,7 +14,6 @@ export interface Debt {
 
 export interface DebtsListProps {
   debts: Debt[]
-  onDeleteDebt: (id: number) => void
   onSelectDebt: (debt: Debt) => void
 }
 

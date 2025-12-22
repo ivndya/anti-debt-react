@@ -31,18 +31,12 @@ export const useDebts = () => {
       remainingAmount: parseFloat(amount),
       categoryId,
       lender,
-      date: now.toISOString(),
+      date: now.toISOString().split('T')[0],
       dueDate,
       paid: false,
     }
 
     setDebts((prev) => [...prev, newDebt])
-  }
-
-  const deleteDebt = (id: number) => {
-    const updatedDebts = normalizedDebts.filter((d) => d.id !== id)
-
-    setDebts(updatedDebts)
   }
 
   const payDebt = (id: number, value: number) => {
@@ -112,7 +106,6 @@ export const useDebts = () => {
   return {
     debts: normalizedDebts,
     addDebt,
-    deleteDebt,
     payDebt,
     getMonthlyStats,
     calculateFinancialHealth,

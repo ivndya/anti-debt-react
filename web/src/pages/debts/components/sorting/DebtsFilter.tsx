@@ -16,6 +16,7 @@ const FILTER_OPTIONS: { label: string; value: DebtsFilterMode }[] = [
 ]
 
 const SORT_FIELD_OPTIONS: { label: string; value: DebtsSortField }[] = [
+  { label: 'По дате выплаты', value: 'dueDate' },
   { label: 'По дате', value: 'date' },
   { label: 'По сумме', value: 'amount' },
 ]
@@ -28,7 +29,7 @@ export const DebtsFilters = ({
   onSortFieldChange,
   onToggleSortDirection,
 }: DebtsFiltersProps) => {
-  const isDateSort = sortField === 'date'
+  const isDateSort = sortField === 'date' || sortField === 'dueDate'
 
   return (
     <div className="flex flex-col gap-4 text-sm text-gray-300">

@@ -10,7 +10,7 @@ import { ChangeDebtModal } from './components/change-debt-modal/ChangeDebtModal'
 import { Debt } from '../../shared/types'
 
 export const Debts = () => {
-  const { debts, addDebt, deleteDebt, payDebt } = useDebts()
+  const { debts, addDebt, payDebt } = useDebts()
 
   const {
     sortedDebts,
@@ -74,7 +74,6 @@ export const Debts = () => {
 
       <DebtsList
         debts={sortedDebts}
-        onDeleteDebt={deleteDebt}
         onSelectDebt={(debt) => {
           setSelectedDebt(debt)
           setPayAmount((debt.remainingAmount ?? debt.amount).toString())
