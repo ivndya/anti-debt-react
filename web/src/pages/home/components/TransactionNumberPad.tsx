@@ -77,7 +77,7 @@ export const TransactionNumberPad = () => {
             ${
               amount === '0' || amount === '0.'
                 ? 'bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900 cursor-not-allowed'
-                : 'bg-green-700'
+                : 'bg-green-600'
             }`}
         >
           <div className="flex items-center justify-center gap-2">
