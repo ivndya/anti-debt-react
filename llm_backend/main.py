@@ -2,7 +2,19 @@ from fastapi import FastAPI
 from schemas import DebtAdviceRequest
 from llm import generate_debt_advice_text
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="Debt Advice API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 @app.post("/api/generate-debt-advice")
 async def generate_debt_advice(request: DebtAdviceRequest):

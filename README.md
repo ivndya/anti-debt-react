@@ -7,7 +7,7 @@ npm run dev -- --host
 
 ## Запустите бэк:
 ```bash
-cd .. && cd llm_backend
+cd llm_backend
 cp .env.example .env
 python3 -m venv venv
 source venv/bin/activate
