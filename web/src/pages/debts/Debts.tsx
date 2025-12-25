@@ -8,9 +8,11 @@ import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal'
 import { useToggle } from '../../shared/hooks/useToggle'
 import { ChangeDebtModal } from './components/change-debt-modal/ChangeDebtModal'
 import { Debt } from '../../shared/types'
+import { useFinance } from '../../shared/finance-context/FinanceContext'
 
 export const Debts = () => {
   const { debts, addDebt, payDebt } = useDebts()
+  const { incomes, expenses } = useFinance()
 
   const {
     sortedDebts,
@@ -63,7 +65,7 @@ export const Debts = () => {
         const response = await fetch('http://127.0.0.1:8000/api/generate-debt-advice', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ debts }),
+          body: JSON.stringify({ debts, incomes, expenses }),
         })
         const data = await response.json()
         setForecastText(data.advice)
@@ -74,7 +76,7 @@ export const Debts = () => {
     }
 
     fetchForecast()
-  }, [debts])
+  }, [debts, incomes, expenses])
 
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">

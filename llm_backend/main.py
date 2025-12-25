@@ -24,7 +24,22 @@ async def generate_debt_advice(request: DebtAdviceRequest):
         for d in request.debts
     )
 
-    # Генерируем прогноз через LLM
-    advice_text = generate_debt_advice_text(debts_list_str)
+    # Формируем текстовый список доходов
+    incomes_list_str = "\n".join(
+        f"- источник: {i.source}, сумма: {i.amount} ₽, дата: {i.date}"
+        for i in request.incomes
+    )
 
+    # Формируем текстовый список расходов
+    expenses_list_str = "\n".join(
+        f"- категория: {e.categoryId}, сумма: {e.amount} ₽, дата: {e.date}, описание: {e.description or '—'}"
+        for e in request.expenses
+    )
+
+    # Генерируем прогноз через LLM
+    advice_text = generate_debt_advice_text(
+        debts_list=debts_list_str,
+        incomes_list=incomes_list_str,
+        expenses_list=expenses_list_str,
+    )
     return {"advice": advice_text}

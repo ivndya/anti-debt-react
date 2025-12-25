@@ -23,13 +23,17 @@ PROMPT_PATH = Path(__file__).parent / "system_prompt.txt"
 
 # Создаем цепочку с шаблоном промпта
 prompt_template = PromptTemplate(
-    input_variables=["debts_list"],
+    input_variables=["debts_list", "incomes_list", "expenses_list"],
     template=PROMPT_PATH.read_text(encoding="utf-8")
 )
 
 llm_chain = LLMChain(llm=llm, prompt=prompt_template)
 
-def generate_debt_advice_text(debts_list: str) -> str:
-    """Генерирует текст прогноза долгов через LLM"""
-    result = llm_chain.run(debts_list=debts_list)
+def generate_debt_advice_text(debts_list: str, incomes_list: str, expenses_list: str) -> str:
+    """Генерирует текст рекомендаций по долгам c учётом доходов/расходов"""
+    result = llm_chain.run(
+        debts_list=debts_list,
+        incomes_list=incomes_list,
+        expenses_list=expenses_list,
+    )
     return result
