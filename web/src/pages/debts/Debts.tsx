@@ -1,3 +1,4 @@
+import { DEBT_FORECASTS } from '../../shared/finance-context/mocks/debtForecasts'
 import { useState } from 'react'
 import { DebtsList } from './components/debts-list/DebtsList'
 import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
@@ -26,6 +27,12 @@ export const Debts = () => {
   const [randomTip] = useState(() => {
     const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length)
     return FINANCIAL_TIPS[randomIndex]
+  })
+
+  // Случайный прогноз выбирается один раз при монтировании
+  const [randomForecast] = useState(() => {
+    const randomIndex = Math.floor(Math.random() * DEBT_FORECASTS.length)
+    return DEBT_FORECASTS[randomIndex]
   })
 
   const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
@@ -57,8 +64,16 @@ export const Debts = () => {
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
       <DebtsNumberPad addDebt={addDebt} />
 
+      {/* Микросовет */}
       <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
+        <div className="text-xs text-gray-400 mb-1">Микросовет</div> {/* подпись */}
         <div className="text-sm leading-relaxed text-gray-300">{randomTip.text}</div>
+      </div>
+
+      {/* Прогноз */}
+      <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
+        <div className="text-xs text-gray-400 mb-1">Прогноз</div> {/* подпись */}
+        <div className="text-sm leading-relaxed text-gray-300">{randomForecast.text}</div>
       </div>
 
       <div className="flex justify-between items-center p-4 mb-3">
