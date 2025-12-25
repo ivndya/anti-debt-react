@@ -190,7 +190,7 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border [&_*]:!outline-none">
       {/* Финансовая статистика + график */}
-      <div className="bg-[#2D2D2D] rounded-2xl p-4 mb-4">
+      <div className="rounded-2xl p-4 mb-4">
         <div className="flex justify-between items-center mb-4">
           <div className="text-lg font-semibold text-white">Финансовая статистика</div>
           <div className="flex gap-2">
@@ -217,7 +217,7 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
           </div>
         </div>
 
-        <div className="bg-[#3D3D3D] rounded-xl mb-4 p-4 [&_.recharts-surface]:outline-none [&_.recharts-wrapper]:outline-none">
+        <div className="rounded-xl mb-4 p-4 [&_.recharts-surface]:outline-none [&_.recharts-wrapper]:outline-none">
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={chartData} margin={{ left: -20, right: 10, top: 5, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#555" />
@@ -315,7 +315,7 @@ export const Stats: React.FC<StatsProps> = ({ stats }) => {
       </div>
 
       {/* Список транзакций */}
-      <div className="bg-[#2D2D2D] rounded-2xl p-4">
+      <div className="rounded-2xl p-4">
         <div className="text-lg font-semibold mb-3 text-white">Транзакции</div>
         <div className="space-y-2">
           {transactions.map((t) => {

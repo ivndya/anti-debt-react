@@ -19,14 +19,6 @@ const AntiDebtApp = () => {
 
   return (
     <div className="flex flex-col h-screen w-full max-w-md mx-auto bg-[#1A1A1A] text-white font-sans box-border">
-      <div className="bg-[#1A1A1A] pt-12 pb-4 px-4 border-b border-[#2D2D2D] w-full box-border">
-        <h1 className="text-2xl font-bold text-center m-0 text-white">
-          {activeScreen === 'home' && 'Антидолг'}
-          {activeScreen === 'stats' && 'Статистика'}
-          {activeScreen === 'debts' && 'Долги'}
-        </h1>
-      </div>
-
       {activeScreen === 'home' && <Home />}
 
       {activeScreen === 'stats' && (

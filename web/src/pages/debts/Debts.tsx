@@ -57,11 +57,11 @@ export const Debts = () => {
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
       <DebtsNumberPad addDebt={addDebt} />
 
-      <div className="bg-[#2D2D2D] rounded-2xl p-4 mb-4">
+      <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
         <div className="text-sm leading-relaxed text-gray-300">{randomTip.text}</div>
       </div>
 
-      <div className="flex justify-between items-center mb-3">
+      <div className="flex justify-between items-center p-4 mb-3">
         <div className="text-xl font-bold text-white">Долги</div>
         <button
           type="button"

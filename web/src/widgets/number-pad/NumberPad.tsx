@@ -16,7 +16,8 @@ export const NumberPad: React.FC<NumberPadProps> = ({ onNumberPress, onDelete })
             <button
               key={num}
               onClick={() => onNumberPress(num)}
-              className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+              className="flex-1 h-16 rounded-xl bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900
+ shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
                 hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
             >
               {num}
@@ -27,7 +28,8 @@ export const NumberPad: React.FC<NumberPadProps> = ({ onNumberPress, onDelete })
       <div className="flex gap-3">
         <button
           onClick={() => onNumberPress('.')}
-          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900
+ shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
             hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
         >
           .
@@ -35,7 +37,8 @@ export const NumberPad: React.FC<NumberPadProps> = ({ onNumberPress, onDelete })
 
         <button
           onClick={() => onNumberPress('0')}
-          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
+          className="flex-1 h-16 rounded-xl bg-gradient-to-br from-zinc-700 via-zinc-800 to-zinc-900
+ shadow-lg text-white text-2xl font-bold flex items-center justify-center cursor-pointer transition-all duration-200 
             hover:scale-105 hover:from-gray-600 hover:to-gray-800 active:scale-95"
         >
           0

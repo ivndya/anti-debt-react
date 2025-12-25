@@ -1,12 +1,12 @@
 import { Category, CategoryMap } from '../../types'
-import { Apple, Bus, Drama, Smartphone } from 'lucide-react'
+import { Bus, Drama, ShoppingBasket, Smartphone } from 'lucide-react'
 
 export const EXPENSE_CATEGORIES: Category[] = [
   {
-    id: 'food',
-    name: 'Еда',
+    id: 'purchases',
+    name: 'Покупки',
     color: '#FF9F43',
-    icon: Apple,
+    icon: ShoppingBasket,
   },
   {
     id: 'transport',
