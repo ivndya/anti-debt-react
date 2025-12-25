@@ -23,13 +23,11 @@ export const Debts = () => {
     toggleSortDirection,
   } = useDebtsView({ debts })
 
-  // Случайный совет выбирается один раз при монтировании
   const [randomTip] = useState(() => {
     const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length)
     return FINANCIAL_TIPS[randomIndex]
   })
 
-  // Случайный прогноз выбирается один раз при монтировании
   const [randomForecast] = useState(() => {
     const randomIndex = Math.floor(Math.random() * DEBT_FORECASTS.length)
     return DEBT_FORECASTS[randomIndex]
@@ -64,15 +62,13 @@ export const Debts = () => {
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
       <DebtsNumberPad addDebt={addDebt} />
 
-      {/* Микросовет */}
       <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
-        <div className="text-xs text-gray-400 mb-1">Микросовет</div> {/* подпись */}
+        <div className="text-xs text-gray-400 mb-1">Микросовет</div>
         <div className="text-sm leading-relaxed text-gray-300">{randomTip.text}</div>
       </div>
 
-      {/* Прогноз */}
       <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
-        <div className="text-xs text-gray-400 mb-1">Прогноз</div> {/* подпись */}
+        <div className="text-xs text-gray-400 mb-1">Стратегия выплат</div>
         <div className="text-sm leading-relaxed text-gray-300">{randomForecast.text}</div>
       </div>
 
