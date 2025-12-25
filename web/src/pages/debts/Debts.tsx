@@ -1,4 +1,3 @@
-import { DEBT_FORECASTS } from '../../shared/finance-context/mocks/debtForecasts'
 import { useEffect, useState } from 'react'
 import { DebtsList } from './components/debts-list/DebtsList'
 import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
