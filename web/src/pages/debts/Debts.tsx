@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DebtsList } from './components/debts-list/DebtsList'
 import { DebtsNumberPad } from './components/debts-number-pad/DebtsNumberPad'
 import { useDebts } from '../../hooks/useDebts'
@@ -8,9 +8,11 @@ import { DebtsFiltersModal } from './components/sorting/DebtsFilterModal'
 import { useToggle } from '../../shared/hooks/useToggle'
 import { ChangeDebtModal } from './components/change-debt-modal/ChangeDebtModal'
 import { Debt } from '../../shared/types'
+import { useFinance } from '../../shared/finance-context/FinanceContext'
 
 export const Debts = () => {
   const { debts, addDebt, payDebt } = useDebts()
+  const { incomes, expenses } = useFinance()
 
   const {
     sortedDebts,
@@ -22,11 +24,12 @@ export const Debts = () => {
     toggleSortDirection,
   } = useDebtsView({ debts })
 
-  // Случайный совет выбирается один раз при монтировании
   const [randomTip] = useState(() => {
     const randomIndex = Math.floor(Math.random() * FINANCIAL_TIPS.length)
     return FINANCIAL_TIPS[randomIndex]
   })
+
+  const [forecastText, setForecastText] = useState<string>('Загрузка стратегии...')
 
   const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
 
@@ -53,12 +56,40 @@ export const Debts = () => {
     }
   }
 
+  // ====== Fetch прогноз стратегии ======
+  useEffect(() => {
+    const fetchForecast = async () => {
+      if (debts.length === 0) return
+
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/generate-debt-advice', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ debts, incomes, expenses }),
+        })
+        const data = await response.json()
+        setForecastText(data.advice)
+      } catch (err) {
+        console.error('Ошибка при получении прогноза:', err)
+        setForecastText('Не удалось загрузить стратегию выплат')
+      }
+    }
+
+    fetchForecast()
+  }, [debts, incomes, expenses])
+
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
       <DebtsNumberPad addDebt={addDebt} />
 
       <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
+        <div className="text-xs text-gray-400 mb-1">Микросовет</div>
         <div className="text-sm leading-relaxed text-gray-300">{randomTip.text}</div>
+      </div>
+
+      <div className="bg-[#3D3D3D] rounded-2xl p-4 m-4 mb-4">
+        <div className="text-xs text-gray-400 mb-1">Стратегия выплат</div>
+        <div className="text-sm leading-relaxed text-gray-300">{forecastText}</div>
       </div>
 
       <div className="flex justify-between items-center p-4 mb-3">
