@@ -10,6 +10,8 @@ import { ChangeDebtModal } from './components/change-debt-modal/ChangeDebtModal'
 import { Debt } from '../../shared/types'
 import { useFinance } from '../../shared/finance-context/FinanceContext'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export const Debts = () => {
   const { debts, addDebt, payDebt } = useDebts()
   const { incomes, expenses } = useFinance()
@@ -62,7 +64,7 @@ export const Debts = () => {
       if (debts.length === 0) return
 
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/generate-debt-advice', {
+        const response = await fetch(`${API_BASE_URL}/api/generate-debt-advice`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ debts, incomes, expenses }),
