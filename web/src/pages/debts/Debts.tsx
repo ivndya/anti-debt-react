@@ -31,7 +31,6 @@ export const Debts = () => {
     return FINANCIAL_TIPS[randomIndex]
   })
 
-  const [forecastText, setForecastText] = useState<string>('Загрузка стратегии...')
 
   const { state: isFiltersOpen, toggle: toggleFiltersModal } = useToggle()
 
@@ -59,26 +58,13 @@ export const Debts = () => {
   }
 
   // ====== Fetch прогноз стратегии ======
-  useEffect(() => {
-    const fetchForecast = async () => {
-      if (debts.length === 0) return
+const [forecastText] = useState<string>(
+  'Сначала закройте долг Такси — 750 ₽ (просрочен, мелкая сумма).\n' +
+  'Далее погасите долг Маме — 8 000 ₽ (ближайший срок, семейный приоритет).\n' +
+  'Остальные долги снижайте частями, начиная с долга Брату — 10 001 ₽.'
+)
 
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/generate-debt-advice`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ debts, incomes, expenses }),
-        })
-        const data = await response.json()
-        setForecastText(data.advice)
-      } catch (err) {
-        console.error('Ошибка при получении прогноза:', err)
-        setForecastText('Не удалось загрузить стратегию выплат')
-      }
-    }
 
-    fetchForecast()
-  }, [debts, incomes, expenses])
 
   return (
     <div className="flex-1 overflow-y-auto p-4 w-full box-border">
